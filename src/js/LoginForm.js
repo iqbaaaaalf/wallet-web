@@ -45,6 +45,11 @@ export default class LoginForm extends Component {
         errorPassword: 'password require',
       });
     }
+    if(username === '' && password === ''){
+      this.setState({
+        errorInvalid: 'username and password is required'
+      });
+    }
     this.props.onSubmit(data);
   }
 
