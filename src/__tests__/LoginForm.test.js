@@ -6,7 +6,7 @@ describe('LoginForm', () => {
   describe('#handleInputUsername', () => {
     it('should save name with Budi', () => {
       const wrapper = shallow(<LoginForm/>);
-      const inputUserName = wrapper.find('#username');
+      const inputUserName = wrapper.find('.username');
       inputUserName.simulate('change', {
         target: {
           value: 'Budi',
@@ -16,7 +16,7 @@ describe('LoginForm', () => {
     });
     it('should save name with Doni', () => {
       const wrapper = shallow(<LoginForm/>);
-      const inputUserName = wrapper.find('#username');
+      const inputUserName = wrapper.find('.username');
       inputUserName.simulate('change', {
         target: {
           value: 'Doni',
@@ -28,7 +28,7 @@ describe('LoginForm', () => {
   describe('#handleInputPassword', () => {
     it('should save password with 123456', () => {
       const wrapper = shallow(<LoginForm/>);
-      const inputPassword = wrapper.find('#password');
+      const inputPassword = wrapper.find('.password');
       inputPassword.simulate('change', {
         target: {
           value: '123456',
@@ -38,7 +38,7 @@ describe('LoginForm', () => {
     });
     it('should save password with 12000', () => {
       const wrapper = shallow(<LoginForm/>);
-      const inputPassword = wrapper.find('#password');
+      const inputPassword = wrapper.find('.password');
       inputPassword.simulate('change', {
         target: {
           value: '12000',
@@ -51,7 +51,7 @@ describe('LoginForm', () => {
     it('should call callback after submit button', () => {
       const mockFunction = jest.fn();
       const wrapper = mount(<LoginForm onSubmit={mockFunction}/>);
-      const submit = wrapper.find('#submit');
+      const submit = wrapper.find('.submit');
       submit.simulate('click');
       expect(mockFunction).toHaveBeenCalled();
     });
@@ -62,11 +62,44 @@ describe('LoginForm', () => {
       };
       const mockFunction = jest.fn();
       const wrapper = mount(<LoginForm onSubmit={mockFunction}/>);
-      const submit = wrapper.find('#submit');
+      const submit = wrapper.find('.submit');
       wrapper.setState(mockData);
       submit.simulate('click');
       expect(mockFunction).toHaveBeenCalled();
       expect(mockFunction).toHaveBeenLastCalledWith(mockData);
+    });
+    it('should change state of errorUsername when username is empty', () => {
+      const mockData = {
+        username: '',
+        password: 'asdasd',
+      };
+      const wrapper = mount(<LoginForm onSubmit={jest.fn()}/>);
+      const submit = wrapper.find('.submit');
+      wrapper.setState(mockData);
+      submit.simulate('click');
+      expect(wrapper.state('errorUsername')).toEqual('username require');
+    });
+    it('should change state of errorPassword when password is empty', () => {
+      const mockData = {
+        username: 'admin',
+        password: '',
+      };
+      const wrapper = mount(<LoginForm onSubmit={jest.fn()}/>);
+      const submit = wrapper.find('.submit');
+      wrapper.setState(mockData);
+      submit.simulate('click');
+      expect(wrapper.state('errorPassword')).toEqual('password require');
+    });
+    it('should change state of errorInvalid when username and password is empty', () => {
+      const mockData = {
+        username: '',
+        password: '',
+      };
+      const wrapper = mount(<LoginForm onSubmit={jest.fn()}/>);
+      const submit = wrapper.find('.submit');
+      wrapper.setState(mockData);
+      submit.simulate('click');
+      expect(wrapper.state('errorInvalid')).toEqual('username and password is required');
     });
   });
 });

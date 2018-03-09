@@ -6,6 +6,9 @@ export default class LoginForm extends Component {
     this.state = {
       username: '',
       password: '',
+      errorUsername: '',
+      errorPassword: '',
+      errorInvalid: '',
     };
     this._handleInputUsername = this._handleInputUsername.bind(this);
     this._handleInputPassword = this._handleInputPassword.bind(this);
@@ -30,6 +33,18 @@ export default class LoginForm extends Component {
       username: username,
       password: password,
     };
+
+    if (username === '') {
+      this.setState({
+        errorUsername: 'username require',
+      });
+    }
+
+    if (password === '') {
+      this.setState({
+        errorPassword: 'password require',
+      });
+    }
     this.props.onSubmit(data);
   }
 
@@ -38,10 +53,12 @@ export default class LoginForm extends Component {
     return (
         <section>
           <label htmlFor="username">username:</label>
-          <input type="text" id="username" onChange={this._handleInputUsername} value={username}/>
+          <input type="text" className="username" onChange={this._handleInputUsername}
+                 value={username}/>
           <label htmlFor="password">username:</label>
-          <input type="text" id="password" onChange={this._handleInputPassword} value={password}/>
-          <button id="submit" onClick={this._handleInputOnSubmit}>Login</button>
+          <input type="text" className="password" onChange={this._handleInputPassword}
+                 value={password}/>
+          <button className="submit" onClick={this._handleInputOnSubmit}>Login</button>
         </section>
     );
   }
