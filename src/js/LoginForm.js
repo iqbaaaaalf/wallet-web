@@ -57,13 +57,30 @@ export default class LoginForm extends Component {
     const { username, password } = this.state;
     return (
         <section>
-          <label htmlFor="username">username:</label>
-          <input type="text" className="username" onChange={this._handleInputUsername}
-                 value={username}/>
-          <label htmlFor="password">username:</label>
-          <input type="text" className="password" onChange={this._handleInputPassword}
-                 value={password}/>
-          <button className="submit" onClick={this._handleInputOnSubmit}>Login</button>
+          <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+             <form>
+                   <div class="avatar"></div>
+              <div class="row justify-content-md-center">
+                <div class="form-group">
+                  <label htmlfor="ErrorUsername"></label>
+                  <input type="text" className="username" class="form-control" onChange={this._handleInputUsername}
+                         value={username} placeholder= "Username"/>
+                </div>
+              </div>
+              <div class="row justify-content-md-center">
+                <div class="form-group">
+                  <label htmlFor="ErrorPassword"></label>
+                  <input type="text" className="password" class="form-control" onChange={this._handleInputPassword}
+                         value={password} placeholder= "Password"/>
+                </div>
+              </div>
+                <div class="row justify-content-md-center">
+                   <button className="submit" class="btn btn-primary" onClick={this._handleInputOnSubmit}>Login</button>
+                </div>
+             </form>
+            </div>
+          </div>
         </section>
     );
   }
