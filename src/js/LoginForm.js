@@ -6,9 +6,11 @@ export default class LoginForm extends Component {
     this.state = {
       username: '',
       password: '',
-      errorUsername: '',
-      errorPassword: '',
-      errorInvalid: '',
+      errorMessage: {
+        ifUsernameEmpty: '',
+        ifPasswordEmpty: '',
+        ifCredentialWrong: '',
+      },
     };
     this._handleInputUsername = this._handleInputUsername.bind(this);
     this._handleInputPassword = this._handleInputPassword.bind(this);
@@ -29,56 +31,65 @@ export default class LoginForm extends Component {
 
   _handleInputOnSubmit() {
     const { username, password } = this.state;
-    const data = {
-      username: username,
-      password: password,
-    };
 
     if (username === '') {
-      this.setState({
-        errorUsername: 'username require',
-      });
+      this.setState(prevState => ({
+        errorMessage: {
+          ...prevState.errorMessage,
+          ifUsernameEmpty: 'username is require',
+        },
+      }));
     }
 
     if (password === '') {
-      this.setState({
-        errorPassword: 'password require',
-      });
+      this.setState(prevState => ({
+        errorMessage: {
+          ...prevState.errorMessage,
+          ifPasswordEmpty: 'password is require',
+        },
+      }));
     }
-    if(username === '' && password === ''){
-      this.setState({
-        errorInvalid: 'username and password is required'
-      });
+
+    if (username !== 'sam' || password !== 'bel') {
+      this.setState(prevState => ({
+        errorMessage: {
+          ...prevState.errorMessage,
+          ifCredentialWrong: 'invalid username or password',
+        },
+      }));
     }
-    this.props.onSubmit(data);
   }
 
   render() {
-    const { username, password } = this.state;
+    const { username, password, errorMessage } = this.state;
     return (
         <section>
-          <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-             <form>
-                   <div class="avatar"></div>
-              <div class="row justify-content-md-center">
-                <div class="form-group">
-                  <label htmlfor="ErrorUsername"></label>
-                  <input type="text" className="username" class="form-control" onChange={this._handleInputUsername}
-                         value={username} placeholder= "Username"/>
+          <div className="jumbotron jumbotron-fluid">
+            <div className="container">
+              <form>
+                <div className="avatar"></div>
+                <div className="row justify-content-md-center">
+                  <div className="form-group">
+                    <label htmlFor="ErrorUsername">{errorMessage.ifUsernameEmpty}</label>
+                    <input type="text" className="username" class="form-control"
+                           onChange={this._handleInputUsername}
+                           value={username} placeholder="Username"/>
+                  </div>
                 </div>
-              </div>
-              <div class="row justify-content-md-center">
-                <div class="form-group">
-                  <label htmlFor="ErrorPassword"></label>
-                  <input type="text" className="password" class="form-control" onChange={this._handleInputPassword}
-                         value={password} placeholder= "Password"/>
+                <div className="row justify-content-md-center">
+                  <div className="form-group">
+                    <label htmlFor="ErrorPassword">{errorMessage.ifPasswordEmpty}</label>
+                    <input type="text" className="password" class="form-control"
+                           onChange={this._handleInputPassword}
+                           value={password} placeholder="Password"/>
+                  </div>
                 </div>
-              </div>
-                <div class="row justify-content-md-center">
-                   <button className="submit" class="btn btn-primary" onClick={this._handleInputOnSubmit}>Login</button>
+                <div className="row justify-content-md-center">
+                  <button className="submit btn btn-primary"
+                          onClick={this._handleInputOnSubmit}>Login
+                  </button>
                 </div>
-             </form>
+              </form>
             </div>
           </div>
         </section>

@@ -14,6 +14,7 @@ describe('LoginForm', () => {
       });
       expect(wrapper.state('username')).toBe('Budi');
     });
+
     it('should save name with Doni', () => {
       const wrapper = shallow(<LoginForm/>);
       const inputUserName = wrapper.find('.username');
@@ -36,6 +37,7 @@ describe('LoginForm', () => {
       });
       expect(wrapper.state('password')).toEqual('123456');
     });
+
     it('should save password with 12000', () => {
       const wrapper = shallow(<LoginForm/>);
       const inputPassword = wrapper.find('.password');
@@ -47,28 +49,9 @@ describe('LoginForm', () => {
       expect(wrapper.state('password')).toEqual('12000');
     });
   });
+
   describe('#handleInputOnSubmit', () => {
-    it('should call callback after submit button', () => {
-      const mockFunction = jest.fn();
-      const wrapper = mount(<LoginForm onSubmit={mockFunction}/>);
-      const submit = wrapper.find('.submit');
-      submit.simulate('click');
-      expect(mockFunction).toHaveBeenCalled();
-    });
-    it('should call callback with given data', () => {
-      const mockData = {
-        username: 'iqbaaaaalf',
-        password: 'asdasd',
-      };
-      const mockFunction = jest.fn();
-      const wrapper = mount(<LoginForm onSubmit={mockFunction}/>);
-      const submit = wrapper.find('.submit');
-      wrapper.setState(mockData);
-      submit.simulate('click');
-      expect(mockFunction).toHaveBeenCalled();
-      expect(mockFunction).toHaveBeenLastCalledWith(mockData);
-    });
-    it('should change state of errorUsername when username is empty', () => {
+    it('should change state of ifUsernameEmpty when username is empty', () => {
       const mockData = {
         username: '',
         password: 'asdasd',
@@ -77,9 +60,10 @@ describe('LoginForm', () => {
       const submit = wrapper.find('.submit');
       wrapper.setState(mockData);
       submit.simulate('click');
-      expect(wrapper.state('errorUsername')).toEqual('username require');
+      expect(wrapper.state('errorMessage').ifUsernameEmpty).toEqual('username is require');
     });
-    it('should change state of errorPassword when password is empty', () => {
+
+    it('should change state of ifPasswordEmpty when password is empty', () => {
       const mockData = {
         username: 'admin',
         password: '',
@@ -88,18 +72,22 @@ describe('LoginForm', () => {
       const submit = wrapper.find('.submit');
       wrapper.setState(mockData);
       submit.simulate('click');
-      expect(wrapper.state('errorPassword')).toEqual('password require');
+      expect(wrapper.state('errorMessage').ifPasswordEmpty).toEqual('password is require');
     });
-    it('should change state of errorInvalid when username and password is empty', () => {
+
+    it('should change state of ifCredentialWrong when username and password didn\'t match', () => {
       const mockData = {
-        username: '',
-        password: '',
+        username: 'sam',
+        password: 'smith',
       };
       const wrapper = mount(<LoginForm onSubmit={jest.fn()}/>);
       const submit = wrapper.find('.submit');
+
       wrapper.setState(mockData);
       submit.simulate('click');
-      expect(wrapper.state('errorInvalid')).toEqual('username and password is required');
+
+      expect(wrapper.state('errorMessage').ifCredentialWrong).toEqual(
+          'invalid username or password');
     });
   });
 });
