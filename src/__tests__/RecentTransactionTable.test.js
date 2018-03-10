@@ -11,7 +11,7 @@ describe('RecentTransactionTable', () => {
         description: 'paying debt',
         amount: '600000'
       }];
-      const wrapper = mount(<RecentTransactionTable transactionCollection={transactionData}/>)
+      const wrapper = mount(<RecentTransactionTable transactionList={transactionData}/>)
       expect(wrapper.props().transactionCollection).toEqual(transactionData);
     });
 

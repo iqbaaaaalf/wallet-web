@@ -3,7 +3,6 @@ import TransactionItem from './TransactionItem';
 
 export default class RecentTransactionTable extends Component{
 
-
   render(){
     return(
         <table>
@@ -16,7 +15,7 @@ export default class RecentTransactionTable extends Component{
           </tr>
           </thead>
           <tbody>
-          <TransactionItem transactionCollection={this.props.transactionCollection}/>
+          <TransactionItem transactionCollection={this.props.transactionList}/>
           </tbody>
         </table>
     );
