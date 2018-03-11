@@ -1,17 +1,18 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import RecentTransactionTable from '../js/RecentTransactionTable';
+import TransactionDesktop from '../js/TransactionDesktop';
 
-describe('RecentTransactionTable', () => {
+describe('TransactionDesktop', () => {
   describe('#showData', () => {
     it('should show data of recent transaction', () => {
       const transactionData = [{
         date: '12/12/12',
-        recipient:'iqbal',
+        from:'iqbal',
+        to : 'doni',
         description: 'paying debt',
         amount: '600000'
       }];
-      const wrapper = mount(<RecentTransactionTable transactionList={transactionData}/>)
+      const wrapper = mount(<TransactionDesktop transactionCollection={transactionData}/>)
       expect(wrapper.props().transactionCollection).toEqual(transactionData);
     });
 
