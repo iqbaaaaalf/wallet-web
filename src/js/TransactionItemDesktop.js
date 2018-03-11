@@ -7,7 +7,7 @@ export default class TransactionItemDesktop extends Component {
   }
 
   render() {
-    return this.props.transactionCollection.map((transaction,index)=>
+    return this.props.transactionCollection.map((transaction, index)=>
         <tr key={index}>
           <td>{transaction.date}</td>
           <td>{transaction.from}</td>

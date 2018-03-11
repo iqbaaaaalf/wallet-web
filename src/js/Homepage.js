@@ -1,5 +1,6 @@
 import React, { Component }from 'react';
 import TransactionDesktop from './TransactionDesktop';
+import TransactionMobile from './TransactionMobile';
 
 
 export default class Homepage extends Component{
