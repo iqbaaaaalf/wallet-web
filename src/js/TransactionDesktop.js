@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import TransactionItem from './TransactionItem';
+import TransactionItemDesktop from './TransactionItemDesktop';
 
-export default class RecentTransactionTable extends Component{
-
+export default class TransactionDesktop extends Component{
 
   render(){
     return(
@@ -10,13 +9,14 @@ export default class RecentTransactionTable extends Component{
           <thead>
           <tr>
             <th>date</th>
-            <th>recipient</th>
+            <th>from</th>
+            <th>To</th>
             <th>description</th>
             <th>amount</th>
           </tr>
           </thead>
           <tbody>
-          <TransactionItem transactionCollection={this.props.transactionCollection}/>
+          <TransactionItemDesktop transactionCollection={this.props.transactionCollection}/>
           </tbody>
         </table>
     );

@@ -1,4 +1,5 @@
 import React, { Component }from 'react';
+import TransactionDesktop from './TransactionDesktop';
 
 
 export default class Homepage extends Component{
@@ -13,7 +14,8 @@ export default class Homepage extends Component{
     return (
         <div>
           <h1 className="Welcome">Hello,{this.state.name}</h1>
-          <RecentTransaction />
+          <TransactionDesktop />
+          <TransactionMobile />
         </div>
     );
   }
