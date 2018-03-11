@@ -1,4 +1,5 @@
 import React, { Component }from 'react';
+import RecentTransactionTable from './RecentTransactionTable';
 
 
 export default class Homepage extends Component{
@@ -9,11 +10,15 @@ export default class Homepage extends Component{
     };
   }
 
+  handleTransactionList() {
+
+  }
+
   render() {
     return (
         <div>
           <h1 className="Welcome">Hello,{this.state.name}</h1>
-          <RecentTransaction />
+          <RecentTransactionTable transactionList={}/>
         </div>
     );
   }

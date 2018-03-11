@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropType from 'prop-types';
 
 export default class TransactionItem extends Component {
   constructor(props){
@@ -15,4 +16,8 @@ export default class TransactionItem extends Component {
         </tr>,
     );
   }
+}
+
+TransactionItem.propTypes = {
+  transactionCollection: PropType.object.isRequired,
 }

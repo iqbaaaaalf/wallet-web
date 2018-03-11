@@ -7,7 +7,8 @@ describe('TransactionItem', () => {
     it('should display transaction item', () => {
       const transactionData = [{
         date: '12/12/12',
-        recipient:'iqbal',
+        fromWalletId:'iqbal',
+        toWalletId:'iqbal'
         description: 'debt',
         amount: '600000'
       }];

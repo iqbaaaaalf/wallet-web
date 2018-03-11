@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import TransactionItem from './TransactionItem';
 
-export default class RecentTransactionTable extends Component{
+export default class RecentTransactionTable extends Component {
 
-  render(){
-    return(
+  render() {
+    return (
         <table>
           <thead>
           <tr>
@@ -21,3 +22,6 @@ export default class RecentTransactionTable extends Component{
     );
   }
 }
+RecentTransactionTable.propTypes = {
+  transactionList: PropTypes.object.isRequired,
+};
