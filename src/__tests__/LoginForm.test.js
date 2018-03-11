@@ -1,11 +1,11 @@
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
 import LoginForm from '../js/LoginForm';
 
 describe('LoginForm', () => {
   describe('#handleInputUsername', () => {
     it('should save name with Budi', () => {
-      const wrapper = shallow(<LoginForm/>);
+      const wrapper = mount(<LoginForm/>);
       const inputUserName = wrapper.find('.username');
       inputUserName.simulate('change', {
         target: {
@@ -16,7 +16,7 @@ describe('LoginForm', () => {
     });
 
     it('should save name with Doni', () => {
-      const wrapper = shallow(<LoginForm/>);
+      const wrapper = mount(<LoginForm/>);
       const inputUserName = wrapper.find('.username');
       inputUserName.simulate('change', {
         target: {
@@ -25,10 +25,24 @@ describe('LoginForm', () => {
       });
       expect(wrapper.state('username')).toBe('Doni');
     });
+
+    it('should change ifUsernameEmpty to empty string when input type change', () => {
+      const wrapper = mount(<LoginForm/>);
+      const inputUserName = wrapper.find('.username');
+
+      wrapper.setState({ errorMessage: { ifUsernameEmpty: 'username is required' } });
+      inputUserName.simulate('change', {
+        target: {
+          value: 'Doni',
+        },
+      });
+      expect(wrapper.state('errorMessage').ifUsernameEmpty).toBe('');
+    });
   });
+
   describe('#handleInputPassword', () => {
     it('should save password with 123456', () => {
-      const wrapper = shallow(<LoginForm/>);
+      const wrapper = mount(<LoginForm/>);
       const inputPassword = wrapper.find('.password');
       inputPassword.simulate('change', {
         target: {
@@ -39,7 +53,7 @@ describe('LoginForm', () => {
     });
 
     it('should save password with 12000', () => {
-      const wrapper = shallow(<LoginForm/>);
+      const wrapper = mount(<LoginForm/>);
       const inputPassword = wrapper.find('.password');
       inputPassword.simulate('change', {
         target: {
@@ -48,6 +62,20 @@ describe('LoginForm', () => {
       });
       expect(wrapper.state('password')).toEqual('12000');
     });
+
+    it('should change ifUsernameEmpty to empty string when input type change', () => {
+      const wrapper = mount(<LoginForm/>);
+      const inputPassword = wrapper.find('.password');
+
+      wrapper.setState({ errorMessage: { ifPasswordEmpty: 'password is required' } });
+      inputPassword.simulate('change', {
+        target: {
+          value: '47',
+        },
+      });
+      expect(wrapper.state('errorMessage').ifPasswordEmpty).toBe('');
+    });
+
   });
 
   describe('#handleInputOnSubmit', () => {
@@ -75,19 +103,5 @@ describe('LoginForm', () => {
       expect(wrapper.state('errorMessage').ifPasswordEmpty).toEqual('password is require');
     });
 
-    it('should change state of ifCredentialWrong when username and password didn\'t match', () => {
-      const mockData = {
-        username: 'sam',
-        password: 'smith',
-      };
-      const wrapper = mount(<LoginForm onSubmit={jest.fn()}/>);
-      const submit = wrapper.find('.submit');
-
-      wrapper.setState(mockData);
-      submit.simulate('click');
-
-      expect(wrapper.state('errorMessage').ifCredentialWrong).toEqual(
-          'invalid username or password');
-    });
   });
 });

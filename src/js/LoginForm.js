@@ -1,3 +1,5 @@
+import axios from 'axios';
+import md5 from 'md5';
 import React, { Component } from 'react';
 
 export default class LoginForm extends Component {
@@ -20,16 +22,23 @@ export default class LoginForm extends Component {
   _handleInputUsername(event) {
     this.setState({
       username: event.target.value,
+      errorMessage: {
+        ifUsernameEmpty: '',
+      },
     });
   }
 
   _handleInputPassword(event) {
     this.setState({
       password: event.target.value,
+      errorMessage: {
+        ifPasswordEmpty: '',
+      },
     });
+
   }
 
-  _handleInputOnSubmit() {
+  async _handleInputOnSubmit() {
     const { username, password } = this.state;
 
     if (username === '') {
@@ -50,14 +59,26 @@ export default class LoginForm extends Component {
       }));
     }
 
-    if (username !== 'sam' || password !== 'bel') {
-      this.setState(prevState => ({
-        errorMessage: {
-          ...prevState.errorMessage,
-          ifCredentialWrong: 'invalid username or password',
+    if (username !== '' || password !== '') {
+      axios({
+        method: 'POST',
+        url: 'http://localhost:3001/login',
+        data: {
+          username: username,
+          password: md5(password),
         },
-      }));
+      }).then(() => {
+        this.props.onSubmit();
+      }).catch(() => {
+        this.setState(prevState => ({
+          errorMessage: {
+            ...prevState.errorMessage,
+            ifCredentialWrong: 'invalid username or password',
+          },
+        }));
+      });
     }
+
   }
 
   render() {
@@ -66,30 +87,29 @@ export default class LoginForm extends Component {
         <section>
           <div className="jumbotron jumbotron-fluid">
             <div className="container">
-              <form>
-                <div className="avatar"></div>
-                <div className="row justify-content-md-center">
-                  <div className="form-group">
-                    <label htmlFor="ErrorUsername">{errorMessage.ifUsernameEmpty}</label>
-                    <input type="text" className="username" class="form-control"
-                           onChange={this._handleInputUsername}
-                           value={username} placeholder="Username"/>
-                  </div>
+              <div className="avatar"></div>
+              <div className="row justify-content-md-center">
+                <label htmlFor="ErrorCredential">{errorMessage.ifUsernameEmpty}</label>
+                <div className="form-group">
+                  <label htmlFor="ErrorUsername">{errorMessage.ifUsernameEmpty}</label>
+                  <input type="text" className="username form-control"
+                         onChange={this._handleInputUsername}
+                         value={username} placeholder="Username"/>
                 </div>
-                <div className="row justify-content-md-center">
-                  <div className="form-group">
-                    <label htmlFor="ErrorPassword">{errorMessage.ifPasswordEmpty}</label>
-                    <input type="text" className="password" class="form-control"
-                           onChange={this._handleInputPassword}
-                           value={password} placeholder="Password"/>
-                  </div>
+              </div>
+              <div className="row justify-content-md-center">
+                <div className="form-group">
+                  <label htmlFor="ErrorPassword">{errorMessage.ifPasswordEmpty}</label>
+                  <input type="text" className="password form-control"
+                         onChange={this._handleInputPassword}
+                         value={password} placeholder="Password"/>
                 </div>
-                <div className="row justify-content-md-center">
-                  <button className="submit btn btn-primary"
-                          onClick={this._handleInputOnSubmit}>Login
-                  </button>
-                </div>
-              </form>
+              </div>
+              <div className="row justify-content-md-center">
+                <button className="submit btn btn-primary"
+                        onClick={this._handleInputOnSubmit}>Login
+                </button>
+              </div>
             </div>
           </div>
         </section>
