@@ -15,6 +15,5 @@ describe('TransactionDesktop', () => {
       const wrapper = mount(<TransactionDesktop transactionCollection={transactionData}/>)
       expect(wrapper.props().transactionCollection).toEqual(transactionData);
     });
-
   });
 });
