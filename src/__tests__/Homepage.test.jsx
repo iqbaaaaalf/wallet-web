@@ -1,9 +1,9 @@
+import { shallow } from 'enzyme';
+import moxios from 'moxios';
 import React from 'react';
-import { mount, shallow } from 'enzyme';
 import Homepage from '../js/Homepage';
 import TransactionDesktop from '../js/TransactionDesktop';
 import TransactionMobile from '../js/TransactionMobile';
-import moxios from 'moxios';
 
 describe('Homepage', () => {
   beforeEach(() => {
@@ -36,24 +36,8 @@ describe('Homepage', () => {
   describe('render', () => {
     it('should contains TransactionDesktop and TransactionMobile', () => {
       const wrapper = shallow(<Homepage/>);
-      expect(wrapper.find(<TransactionDesktop/>).length).toBe(true);
-      expect(wrapper.find(<TransactionMobile/>).length).toBe(true);
-    });
-  });
-  describe('fetch data', () => {
-    it('Should fill data with data from server', (done) => {
-      const wrapper = mount(<Homepage/>);
-      const response = [ {} ];
-      moxios.wait(() => {
-        let request = moxios.requests.mostRecent();
-        request.respondWith({
-          status: 200,
-          response: response,
-        }).then(() => {
-          expect(wrapper.state('data').length).toEqual(2);
-          done();
-        });
-      });
+      expect(wrapper.find(TransactionDesktop).length).toBe(1);
+      expect(wrapper.find(TransactionMobile).length).toBe(1);
     });
   });
 });

@@ -1,6 +1,6 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
-import TransactionItem from '../js/TransactionItem';
+import TransactionItem from '../components/TransactionItem';
 
 describe('TransactionItem', () => {
   describe('#ShowItemData', () => {
@@ -8,7 +8,7 @@ describe('TransactionItem', () => {
       const transactionData = [{
         date: '12/12/12',
         fromWalletId:'iqbal',
-        toWalletId:'iqbal'
+        toWalletId:'iqbal',
         description: 'debt',
         amount: '600000'
       }];
