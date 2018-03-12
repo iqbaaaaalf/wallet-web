@@ -28,4 +28,28 @@ describe('FilterQuery', () => {
       expect(wrapper.state('amount')).toEqual('47');
     });
   });
+
+  describe('#_onSubmitLesser', () => {
+    it('should call callback if button lesser click', () => {
+      const mockCallback = jest.fn();
+      const wrapper = mount(<FilterAmount onChange={jest.fn()} onClick={mockCallback}/>);
+      const buttonLesser = wrapper.find('.button-amount--lesser');
+
+      buttonLesser.simulate('click');
+
+      expect(mockCallback).toHaveBeenCalled();
+    });
+  });
+
+  describe('#_onSubmitGreater', () => {
+    it('should call callback if button greater click', () => {
+      const mockCallback = jest.fn();
+      const wrapper = mount(<FilterAmount onChange={jest.fn()} onClick={mockCallback}/>);
+      const buttonGreater = wrapper.find('.button-amount--greater');
+
+      buttonGreater.simulate('click');
+
+      expect(mockCallback).toHaveBeenCalled();
+    });
+  });
 });
