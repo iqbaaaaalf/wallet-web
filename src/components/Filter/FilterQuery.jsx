@@ -13,6 +13,7 @@ export default class FilterQuery extends React.Component {
           <input className="filter-query--input form-control"
                  onChange={this._onChangeQuery.bind(this)}
                  value={value}
+                 placeholder="search ..."
           />
         </div>
     );

@@ -1,4 +1,5 @@
 import React from 'react';
+import FilterAmount from './FilterAmount';
 import FilterQuery from './FilterQuery';
 
 export default class Filter extends React.Component {
@@ -19,8 +20,15 @@ export default class Filter extends React.Component {
 
   render() {
     return (
-        <div>
-          <FilterQuery onChange={this.updateQuery} value={this.state.query}/>
+        <div className='container'>
+          <div className='row'>
+            <div className='col'>
+              <FilterQuery onChange={this.updateQuery} value={this.state.query}/>
+            </div>
+            <div>
+              <FilterAmount/>
+            </div>
+          </div>
         </div>
     );
   }
