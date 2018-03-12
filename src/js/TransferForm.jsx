@@ -8,9 +8,11 @@ export default class TransferForm extends Component{
       to: '',
       amount: '',
       description: '',
+      errorInvalid: ''
     };
     this._handleAmount = this._handleAmount.bind(this);
     this._handleDescription = this._handleDescription.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
   _handleAmount(event){
@@ -22,6 +24,17 @@ export default class TransferForm extends Component{
     this.setState({
       description: event.target.value,
     })
+  }
+
+  _handleSubmit(){
+    const { from, to, amount, description} = this.state;
+    const data = {
+      from: from,
+      to: to,
+      amount: amount,
+      description: description,
+    };
+    this.props.onSubmit(data);
   }
 
   render() {

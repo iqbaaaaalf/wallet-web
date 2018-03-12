@@ -38,4 +38,21 @@ describe('Transferform', () => {
       expect(wrapper.state('description')).toEqual('hello this is text');
     });
   });
+  describe('handleSubmit', () => {
+    it('should call callback with given data', () => {
+      const mockData = {
+        from : 'Budi',
+        to : 'Doni',
+        amount : '30000',
+        description : 'pay go food'
+      };
+      const mockFunction = jest.fn();
+      const wrapper = mount(<Transferform onSubmit={mockFunction}/>);
+      const submit = wrapper.find('.submit');
+      wrapper.setState(mockData);
+      submit.simulate('click');
+      expect(mockFunction).toHaveBeenCalled();
+      expect(mockFunction).toHaveBeenLastCalledWith(mockData);
+    });
+  });
 });
