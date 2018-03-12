@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import TransactionDesktop from '../js/TransactionDesktop';
+import TransactionDesktop from '../components/TransactionDesktop';
 
 describe('TransactionDesktop', () => {
   describe('#showData', () => {

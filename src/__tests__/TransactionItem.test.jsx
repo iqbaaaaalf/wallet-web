@@ -1,6 +1,6 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
-import TransactionItem from '../js/TransactionItem';
+import TransactionItem from '../components/TransactionItem';
 
 describe('TransactionItem', () => {
   describe('#ShowItemData', () => {

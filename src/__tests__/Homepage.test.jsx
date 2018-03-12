@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import Homepage from '../js/Homepage';
-import TransactionDesktop from '../js/TransactionDesktop';
-import TransactionMobile from '../js/TransactionMobile';
+import Homepage from '../components/Homepage';
+import TransactionDesktop from '../components/TransactionDesktop';
+import TransactionMobile from '../components/TransactionMobile';
 
 describe('Homepage', () => {
   describe('#handleWelcome', () => {

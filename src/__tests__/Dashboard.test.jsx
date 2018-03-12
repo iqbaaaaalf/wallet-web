@@ -1,6 +1,6 @@
 import { mount } from 'enzyme/build/index';
 import React from 'react';
-import Dashboard from '../js/Dashboard';
+import Dashboard from '../components/Dashboard';
 
 describe('Dashboard', () => {
   describe('#ShowData', () => {
