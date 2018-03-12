@@ -34,6 +34,11 @@ export default class TransferForm extends Component{
       amount: amount,
       description: description,
     };
+    if (from === '' || to === '' || amount === '' || description === '') {
+      this.setState({
+        errorInvalid: 'Please fill empty field',
+      });
+    }
     this.props.onSubmit(data);
   }
 

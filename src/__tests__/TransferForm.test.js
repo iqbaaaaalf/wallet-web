@@ -54,5 +54,19 @@ describe('Transferform', () => {
       expect(mockFunction).toHaveBeenCalled();
       expect(mockFunction).toHaveBeenLastCalledWith(mockData);
     });
+    it('should call errorInvalid if any of field is empty', () => {
+      const mockData = {
+        from : '',
+        to : '',
+        amount : '',
+        description : ''
+      };
+      const mockFunction = jest.fn();
+      const wrapper = mount(<Transferform onSubmit={mockFunction}/>);
+      const submit = wrapper.find('.submit');
+      wrapper.setState(mockData);
+      submit.simulate('click');
+      expect(wrapper.state('errorInvalid')).toEqual('Please fill empty field')
+    });
   });
 });
