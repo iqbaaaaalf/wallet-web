@@ -26,4 +26,16 @@ describe('Transferform', () => {
       expect(wrapper.state('amount')).toEqual('250000');
     });
   });
+  describe('handleDescription', () => {
+    it('should return text on textarea as description', () => {
+      const wrapper = shallow(<Transferform/>);
+      const inputDescription = wrapper.find('.description');
+      inputDescription.simulate('change',{
+        target:{
+          value: 'hello this is text',
+        },
+      });
+      expect(wrapper.state('description')).toEqual('hello this is text');
+    });
+  });
 });
