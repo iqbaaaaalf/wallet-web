@@ -1,4 +1,5 @@
-import React, { Component }from 'react';
+import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -8,8 +9,17 @@ export default class Dashboard extends Component {
       balance: '',
     };
   }
-  render(){
-    return(
+
+  componentDidMount() {
+    axios.get('http://localhost:3000/users/1/wallets').then((response) => {
+      this.setState({
+        balance: response.balance,
+      });
+    });
+  }
+
+  render() {
+    return (
         <div>
           <h1 className="Name">{this.state.name}</h1>
           <label htmlFor="Balance">Your Balance</label>
@@ -17,6 +27,6 @@ export default class Dashboard extends Component {
              {this.state.balance}
           </span>
         </div>
-    )
+    );
   }
 }
