@@ -6,7 +6,7 @@ export default class TransactionMobile extends Component{
   render(){
     return(
       <div className="Container">
-       <TransactionItemMobile />
+       <TransactionItemMobile transactionCollection={this.props.transactionCollection}/>
       </div>
     );
   }
