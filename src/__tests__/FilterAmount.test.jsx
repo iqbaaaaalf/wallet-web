@@ -39,6 +39,20 @@ describe('FilterQuery', () => {
 
       expect(mockCallback).toHaveBeenCalled();
     });
+
+    it('should call callback with proper data if button lesser click', () => {
+      const mockCallback = jest.fn();
+      const mockData = {
+        filterAmountMethod: 'lesser',
+      };
+      const wrapper = mount(<FilterAmount onChange={jest.fn()} onClick={mockCallback}/>);
+      const buttonLesser = wrapper.find('.button-amount--lesser');
+
+      buttonLesser.simulate('click');
+
+      expect(mockCallback).toHaveBeenCalled();
+      expect(mockCallback).toHaveBeenCalledWith(mockData);
+    });
   });
 
   describe('#_onSubmitGreater', () => {
@@ -50,6 +64,20 @@ describe('FilterQuery', () => {
       buttonGreater.simulate('click');
 
       expect(mockCallback).toHaveBeenCalled();
+    });
+
+    it('should call callback with proper data if button greater click', () => {
+      const mockCallback = jest.fn();
+      const mockData = {
+        filterAmountMethod: 'greater',
+      };
+      const wrapper = mount(<FilterAmount onChange={jest.fn()} onClick={mockCallback}/>);
+      const buttonGreater = wrapper.find('.button-amount--greater');
+
+      buttonGreater.simulate('click');
+
+      expect(mockCallback).toHaveBeenCalled();
+      expect(mockCallback).toHaveBeenCalledWith(mockData);
     });
   });
 });

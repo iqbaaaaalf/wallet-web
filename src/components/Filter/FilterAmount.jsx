@@ -17,11 +17,17 @@ export default class FilterAmount extends React.Component {
   }
 
   _onSubmitLesser() {
-    this.props.onClick();
+    const data = {
+      filterAmountMethod: 'lesser',
+    };
+    this.props.onClick(data);
   }
 
   _onSubmitGreater() {
-    this.props.onClick();
+    const data = {
+      filterAmountMethod: 'greater',
+    };
+    this.props.onClick(data);
   }
 
   render() {
