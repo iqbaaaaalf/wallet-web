@@ -37,7 +37,7 @@ export default class AddPayee extends Component {
     return (
         <section>
           <div className="card border-primary mb-3 col-4 align-content-lg-center">
-            <div className="card-header">ADD Payee</div>
+            <div className="card-header">Add Payee</div>
             <div className="card-body text-primary">
               <input type="text" className="addPayee" onChange={this._handleInputPayee}
                      value={addPayee} />
@@ -49,6 +49,4 @@ export default class AddPayee extends Component {
         </section>
     );
   }
-
-
 }
