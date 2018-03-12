@@ -28,7 +28,7 @@ describe('Homepage', () => {
   describe('render', () => {
     it('should contains TransactionDesktop and TransactionMobile', () => {
       const wrapper = shallow(<Homepage/>);
-      expect(wrapper.contains(<TransactionDesktop/>)).toBe(true);
+      expect(wrapper.contains(<TransactionDesktop transactionCollection={[{date:'2018-05-'}]}/>)).toBe(true);
       expect(wrapper.contains(<TransactionMobile/>)).toBe(true);
     });
   });

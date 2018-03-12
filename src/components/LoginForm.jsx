@@ -64,19 +64,19 @@ export default class LoginForm extends Component {
               <div className="row justify-content-md-center">
                 <div className="form-group">
                   <label htmlFor="ErrorUsername"></label>
-                  <input type="text" className="username" className="form-control" onChange={this._handleInputUsername}
+                  <input type="text" className="username form-control" onChange={this._handleInputUsername}
                          value={username} placeholder= "Username"/>
                 </div>
               </div>
               <div className="row justify-content-md-center">
                 <div className="form-group">
                   <label htmlFor="ErrorPassword"></label>
-                  <input type="text" className="password" className="form-control" onChange={this._handleInputPassword}
+                  <input type="text" className="password form-control" onChange={this._handleInputPassword}
                          value={password} placeholder= "Password"/>
                 </div>
               </div>
                 <div className="row justify-content-md-center">
-                   <button className="submit" className="btn btn-primary" onClick={this._handleInputOnSubmit}>Login</button>
+                   <button className="submit btn btn-primary" onClick={this._handleInputOnSubmit}>Login</button>
                 </div>
              </form>
             </div>

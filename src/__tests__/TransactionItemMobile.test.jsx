@@ -12,7 +12,7 @@ describe('TransactionItemMobile', () => {
         description: 'debt',
         amount: '600000'
       }];
-      const wrapper = mount(<TransactionItemMobile transactionCollection={transactionData}/>);
+      const wrapper = shallow(<TransactionItemMobile transactionCollection={transactionData}/>);
       const item = wrapper.find('div').at(0);
       const dateColumn = item.find('text').at(0).text();
       const fromColoumn = item.find('text').at(1).text();
