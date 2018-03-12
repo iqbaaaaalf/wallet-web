@@ -38,6 +38,17 @@ describe('Transferform', () => {
       expect(wrapper.state('description')).toEqual('hello this is text');
     });
   });
+  describe('handleReceiver', () => {
+    it('should return correct value of payee list ', () => {
+      const wrapper = shallow(<Transferform/>);
+      const data = {
+        name : 'Doni',
+      };
+      wrapper.state(data);
+      const to = wrapper.find('a').at(0);
+      expect(to.text()).toEqual('Doni');
+    });
+  });
   describe('handleSubmit', () => {
     it('should call callback with given data', () => {
       const mockData = {
