@@ -9,8 +9,14 @@ export default class TransferForm extends Component{
       amount: '',
       description: '',
     };
+    this._handleAmount = this._handleAmount.bind(this);
   }
 
+  _handleAmount(event){
+    this.setState({
+      amount: event.target.value,
+    })
+  }
 
   render() {
     return (

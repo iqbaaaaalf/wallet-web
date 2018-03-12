@@ -14,4 +14,16 @@ describe('Transferform', () => {
       expect(from.text()).toEqual('Budi');
     });
   });
+  describe('handleAmount', () => {
+    it('should return amount of transfer', () => {
+      const wrapper = shallow(<Transferform/>);
+      const inputAmount = wrapper.find('.amount');
+      inputAmount.simulate('change',{
+        target:{
+          value: '250000',
+        },
+      });
+      expect(wrapper.state('amount')).toEqual('250000');
+    });
+  });
 });
