@@ -57,26 +57,26 @@ export default class LoginForm extends Component {
     const { username, password } = this.state;
     return (
         <section>
-          <div class="jumbotron jumbotron-fluid">
-            <div class="container">
+          <div className="jumbotron jumbotron-fluid">
+            <div className="container">
              <form>
-                   <div class="avatar"></div>
-              <div class="row justify-content-md-center">
-                <div class="form-group">
-                  <label htmlfor="ErrorUsername"></label>
-                  <input type="text" className="username" class="form-control" onChange={this._handleInputUsername}
+                   <div className="avatar"></div>
+              <div className="row justify-content-md-center">
+                <div className="form-group">
+                  <label htmlFor="ErrorUsername"></label>
+                  <input type="text" className="username" className="form-control" onChange={this._handleInputUsername}
                          value={username} placeholder= "Username"/>
                 </div>
               </div>
-              <div class="row justify-content-md-center">
-                <div class="form-group">
+              <div className="row justify-content-md-center">
+                <div className="form-group">
                   <label htmlFor="ErrorPassword"></label>
-                  <input type="text" className="password" class="form-control" onChange={this._handleInputPassword}
+                  <input type="text" className="password" className="form-control" onChange={this._handleInputPassword}
                          value={password} placeholder= "Password"/>
                 </div>
               </div>
-                <div class="row justify-content-md-center">
-                   <button className="submit" class="btn btn-primary" onClick={this._handleInputOnSubmit}>Login</button>
+                <div className="row justify-content-md-center">
+                   <button className="submit" className="btn btn-primary" onClick={this._handleInputOnSubmit}>Login</button>
                 </div>
              </form>
             </div>

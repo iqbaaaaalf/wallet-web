@@ -8,7 +8,7 @@ describe('TransactionItem', () => {
       const transactionData = [{
         date: '12/12/12',
         fromWalletId:'iqbal',
-        toWalletId:'iqbal'
+        toWalletId:'iqbal',
         description: 'debt',
         amount: '600000'
       }];
