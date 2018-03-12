@@ -22,6 +22,3 @@ export default class TransactionDesktop extends Component{
     );
   }
 }
-RecentTransactionTable.propTypes = {
-  transactionList: PropTypes.object.isRequired,
-};

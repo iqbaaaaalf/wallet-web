@@ -15,7 +15,7 @@ export default class Homepage extends Component{
     return (
         <div>
           <h1 className="Welcome">Hello,{this.state.name}</h1>
-          <TransactionDesktop />
+          <TransactionDesktop transactionCollection={[{date:'2018-05-'}]}/>
           <TransactionMobile />
         </div>
     );

@@ -5,7 +5,6 @@ import Homepage from './Homepage';
 import LoginForm from './LoginForm';
 import '../../node_modules/bootstrap/dist/css/bootstrap-grid.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
-import RecentTransactionTable from './RecentTransactionTable';
 
 class App extends Component {
   render() {
