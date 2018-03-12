@@ -5,7 +5,7 @@ export default class TransactionDesktop extends Component{
 
   render(){
     return(
-        <table>
+        <table className={'table table-bordered'}>
           <thead>
           <tr>
             <th>date</th>

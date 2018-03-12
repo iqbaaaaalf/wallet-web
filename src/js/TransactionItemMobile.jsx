@@ -9,11 +9,11 @@ export default class TransactionItemMobile extends Component{
     return this.props.transactionCollection.map((transaction, index) =>
         <div className="Card" key={index}>
           <text>{transaction.date}</text>
-          <text>{transaction.from}</text>
-          <text>{transaction.to}</text>
+          <text>{transaction.FromWallet === null ? '':transaction.FromWallet.User.name}</text>
+          <text>{transaction.ToWallet=== null ? '':transaction.ToWallet.User.name}</text>
           <text>{transaction.description}</text>
           <text>{transaction.amount}</text>
-        </div>,
+        </div>
     );
   }
 }
