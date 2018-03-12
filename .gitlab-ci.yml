@@ -1,7 +1,3 @@
-cache:
-  paths:
-    - node_modules
-
 stages:
   - test
   - lint
@@ -13,7 +9,10 @@ test:
   image: node:9-alpine
   stage: test
   script:
-    - CI=true yarn test
+    - CI=true yarn test -- --coverage
+  artifacts:
+    paths:
+      - coverage/
 
 lint:
   image: chetankothari/js-pronto
