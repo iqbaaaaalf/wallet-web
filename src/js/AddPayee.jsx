@@ -5,10 +5,12 @@ export default class AddPayee extends Component {
     super(props);
     this.state = {
       addPayee: '',
-      errorInvalid: ''
+      errorInvalid: '',
+      username: 'iqbal',
     };
     this._handleInputPayee = this._handleInputPayee.bind(this);
     this._handleInputOnSubmit = this._handleInputOnSubmit.bind(this);
+    this._handleInputOnPayee = this._handleInputOnPayee.bind(this);
   }
 
   _handleInputPayee(event) {
@@ -30,6 +32,8 @@ export default class AddPayee extends Component {
     }
     this.props.onSubmit(data);
   }
+  _handleInputOnPayee() {
+  };
 
 
   render() {
@@ -44,6 +48,8 @@ export default class AddPayee extends Component {
               <button type="submit" className="submit btn-primary"
                       onClick={this._handleInputOnSubmit}> search
               </button>
+              <p className="payee">{this.state.username}</p>
+              <button type="submit" className="payeeExist" onClick={this._handleInputOnPayee}>Add</button>
             </div>
           </div>
         </section>
