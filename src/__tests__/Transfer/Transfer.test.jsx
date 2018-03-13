@@ -79,5 +79,19 @@ describe('Transfer', () => {
       submit.simulate('click');
       expect(wrapper.state('errorAmount')).toEqual('Amount is require');
     });
+    it('should call errorDescription if Description is empty', () => {
+      const mockData = {
+        from : 'Budi',
+        to : 'Doni',
+        amount : '20000',
+        description : ''
+      };
+      const mockFunction = jest.fn();
+      const wrapper = mount(<Transfer onSubmit={mockFunction}/>);
+      const submit = wrapper.find('.submit');
+      wrapper.setState(mockData);
+      submit.simulate('click');
+      expect(wrapper.state('errorDescription')).toEqual('Description is require');
+    });
   });
 });
