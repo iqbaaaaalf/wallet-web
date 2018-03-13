@@ -65,5 +65,19 @@ describe('Transfer', () => {
       expect(mockFunction).toHaveBeenCalled();
       expect(mockFunction).toHaveBeenLastCalledWith(mockData);
     });
+    it('should call errorAmount if amount is empty', () => {
+      const mockData = {
+        from : 'Budi',
+        to : 'Doni',
+        amount : '',
+        description : 'pay go food'
+      };
+      const mockFunction = jest.fn();
+      const wrapper = mount(<Transfer onSubmit={mockFunction}/>);
+      const submit = wrapper.find('.submit');
+      wrapper.setState(mockData);
+      submit.simulate('click');
+      expect(wrapper.state('errorAmount')).toEqual('Amount is require');
+    });
   });
 });

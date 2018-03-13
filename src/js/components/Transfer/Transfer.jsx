@@ -8,6 +8,8 @@ export default class Transfer extends Component{
       to: '',
       amount: '',
       description: '',
+      errorAmount: '',
+      errorDescription: '',
     };
     this._handleAmount = this._handleAmount.bind(this);
     this._handleDescription = this._handleDescription.bind(this);
@@ -34,6 +36,16 @@ export default class Transfer extends Component{
       to: to,
       amount: amount,
       description: description,
+    };
+    if (amount === '') {
+      this.setState({
+        errorAmount: 'Amount is require',
+      });
+    }
+    if (description === '') {
+      this.setState({
+        errorDescription: 'Description is require',
+      });
     }
     this.props.onSubmit(data);
   }
@@ -44,56 +56,56 @@ export default class Transfer extends Component{
           <div className="card border-primary mb-3 col-4 align-content-lg-center">
             <div className="card-header">Transfer</div>
             <div className="card-body text-primary">
-              <div class="row">
-                <div class="col">
+              <div className="row">
+                <div className="col">
                   <label htmlFor="from">From:</label>
                 </div>
-                <div class="col-8">
+                <div className="col-8">
                   <span className="from">Budi</span>
                 </div>
               </div>
             </div>
             <br/>
-            <div class="row">
-              <div class="col">
+            <div className="row">
+              <div className="col">
                 <label htmlFor="To">To:</label>
               </div>
-              <div class="col-8">
-                <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button"
+              <div className="col-8">
+                <div className="dropdown">
+                  <button className="btn btn-secondary dropdown-toggle" type="button"
                           id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                           aria-expanded="true">
                     Receiver
                   </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Doni</a>
-                    <a class="dropdown-item" href="#">Dono</a>
-                    <a class="dropdown-item" href="#">Dona</a>
+                  <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a className="dropdown-item" href="#">Doni</a>
+                    <a className="dropdown-item" href="#">Dono</a>
+                    <a className="dropdown-item" href="#">Dona</a>
                   </div>
                 </div>
               </div>
             </div>
             <br/>
-            <div class="row">
-              <div class="col">
+            <div className="row">
+              <div className="col">
                 <label htmlFor="amount">Amount: </label>
               </div>
-              <div class="col-8">
+              <div className="col-8">
                 <input type="text" className="amount" onChange={this._handleAmount} />
               </div>
             </div>
             <br/>
-            <div class="row">
-              <div class="col">
+            <div className="row">
+              <div className="col">
                 <label htmlFor="description">Description :</label>
               </div>
-              <div class="col-8">
+              <div className="col-8">
                 <textarea className="description" onChange={this._handleDescription}/>
               </div>
             </div>
             <br/>
-            <div class="row">
-              <div class="col">
+            <div className="row">
+              <div className="col">
                 <button type="submit" className="submit btn btn-secondary" onClick={this._handleSubmit} > Send </button>
               </div>
             </div>
