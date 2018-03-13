@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme/build/index';
 import moxios from 'moxios';
 import React from 'react';
-import UserName from '../components/UserName';
+import UserName from '../js/components/UserName';
 
 describe('Dashboard', () => {
   beforeEach(() => {

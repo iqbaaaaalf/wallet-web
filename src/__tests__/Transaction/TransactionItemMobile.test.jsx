@@ -1,6 +1,6 @@
 import { mount, shallow} from 'enzyme';
 import React from 'react';
-import TransactionItemMobile from '../../components/Transaction/TransactionItemMobile';
+import TransactionItemMobile from '../../js/components/Transaction/TransactionItemMobile';
 
 describe('TransactionItemMobile', () => {
   describe('#ShowItemData', () => {

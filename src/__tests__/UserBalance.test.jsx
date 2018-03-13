@@ -1,7 +1,7 @@
 import { shallow,mount } from 'enzyme/build/index';
 import moxios from 'moxios';
 import React from 'react';
-import UserBalance from '../components/UserBalance';
+import UserBalance from '../js/components/UserBalance';
 
 describe('Dashboard', () => {
   beforeEach(() => {

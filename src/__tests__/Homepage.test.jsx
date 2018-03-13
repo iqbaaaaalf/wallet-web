@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import Homepage from '../components/Homepage';
-import Transaction from '../components/Transaction/Transaction';
+import Homepage from '../js/components/Homepage';
+import Transaction from '../js/components/Transaction/Transaction';
 
 describe('Homepage', () => {
   describe('#handleWelcome', () => {

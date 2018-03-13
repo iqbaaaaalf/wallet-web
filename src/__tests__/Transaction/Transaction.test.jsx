@@ -1,9 +1,9 @@
 import { mount, shallow } from 'enzyme/build/index';
 import React from 'react';
 import moxios from 'moxios';
-import Transaction from '../../components/Transaction/Transaction';
-import TransactionDesktop from '../../components/Transaction/TransactionDesktop';
-import TransactionMobile from '../../components/Transaction/TransactionMobile';
+import Transaction from '../../js/components/Transaction/Transaction';
+import TransactionDesktop from '../../js/components/Transaction/TransactionDesktop';
+import TransactionMobile from '../../js/components/Transaction/TransactionMobile';
 
 describe('Transaction', () => {
   beforeEach(() => {
