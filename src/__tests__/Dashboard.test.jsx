@@ -1,8 +1,8 @@
 import { shallow } from 'enzyme/build/index';
 import React from 'react';
-import Dashboard from '../components/Dashboard';
-import UserBalance from '../components/UserBalance';
-import UserName from '../components/UserName';
+import Dashboard from '../js/components/Dashboard';
+import UserBalance from '../js/components/UserBalance';
+import UserName from '../js/components/UserName';
 
 describe('Dashboard', () => {
   describe('render', function() {

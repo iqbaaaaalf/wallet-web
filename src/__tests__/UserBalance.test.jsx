@@ -1,7 +1,7 @@
 import { shallow,mount } from 'enzyme/build/index';
 import moxios from 'moxios';
 import React from 'react';
-import UserBalance from '../components/UserBalance';
+import UserBalance from '../js/components/UserBalance';
 
 describe('Dashboard', () => {
   beforeEach(() => {
@@ -18,7 +18,7 @@ describe('Dashboard', () => {
       };
       wrapper.setState(data);
       const balance = wrapper.find('#wallet-balance');
-      expect(balance.text()).toBe('400000');
+      expect(balance.text()).toBe('Rp.400000,-');
     });
   });
   describe('fetch data', () => {

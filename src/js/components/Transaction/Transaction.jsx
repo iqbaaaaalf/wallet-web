@@ -24,23 +24,8 @@ export default class Transaction extends Component {
     });
   }
 
-//  shouldComponentUpdate(nextProps, nextState) {
-//    let urlHook = `http://localhost:3000/wallets/${nextProps.walletNumber}/transactions?`;
-//    if (nextProps.size !== undefined) {
-//      urlHook += `&size=${nextProps.size}`;
-//    }
-//    if (nextProps.transactionSortColumn !== undefined && nextProps.transactionSortValue !==
-// undefined) { urlHook += `&orderBy=${nextProps.transactionSortColumn}`; urlHook +=
-// `&order=${nextProps.transactionSortColumn}`; } if (nextProps.transactionFilterValue !==
-// undefined && nextProps.transactionFilterColumn !== undefined) { urlHook +=
-// `&filterBy=${nextProps.transactionSortColumn}`; urlHook +=
-// `&filter=${nextProps.transactionSortColumn}`; } axios.get(urlHook).then((response) => {
-// this.setState({ transactionCollection: response.data, }); }); }
 
   render() {
-    console.log('render log----');
-    console.log(this.state.transactionCollection);
-    console.log('--------------');
     return (
         <div>
           <TransactionDesktop transactionCollection={this.state.transactionCollection}/>

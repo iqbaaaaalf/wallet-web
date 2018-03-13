@@ -1,7 +1,7 @@
-import { shallow,mount } from 'enzyme/build/index';
+import { shallow } from 'enzyme/build/index';
 import moxios from 'moxios';
 import React from 'react';
-import UserName from '../components/UserName';
+import UserName from '../js/components/UserName';
 
 describe('Dashboard', () => {
   beforeEach(() => {
@@ -18,24 +18,7 @@ describe('Dashboard', () => {
       };
       wrapper.setState(data);
       const username = wrapper.find('#username');
-      expect(username.text()).toBe(`iqbal`);
-    });
-  });
-  describe('fetch data', () => {
-    it('should fetch balance data', (done) => {
-      const wrapper = mount(<UserName/>);
-      const response = {name:'iqbal'};
-
-      moxios.wait(() => {
-        let request = moxios.requests.mostRecent();
-        request.respondWith({
-          status: 200,
-          response: response,
-        }).then(() => {
-          expect(wrapper.state('name')).toEqual('iqbal');
-          done();
-        });
-      });
+      expect(username.text()).toBe(`Hello, iqbal`);
     });
   });
 });

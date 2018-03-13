@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import FilterAmount from '../components/Filter/FilterAmount.jsx';
+import FilterAmount from '../js/components/Filter/FilterAmount.jsx';
 
 describe('FilterQuery', () => {
   describe('#_onChangeInput', () => {

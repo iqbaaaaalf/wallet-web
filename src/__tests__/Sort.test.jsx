@@ -1,6 +1,6 @@
 import { mount } from 'enzyme';
 import React from 'react';
-import Sort from '../components/Sort';
+import Sort from '../js/components/Sort';
 
 describe('Sort', () => {
   describe('#_onSubmitHighest', () => {

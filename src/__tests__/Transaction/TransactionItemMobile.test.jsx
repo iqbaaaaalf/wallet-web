@@ -1,6 +1,6 @@
 import { mount, shallow} from 'enzyme';
 import React from 'react';
-import TransactionItemMobile from '../../components/Transaction/TransactionItemMobile';
+import TransactionItemMobile from '../../js/components/Transaction/TransactionItemMobile';
 
 describe('TransactionItemMobile', () => {
   describe('#ShowItemData', () => {
@@ -23,7 +23,7 @@ describe('TransactionItemMobile', () => {
       const amountColumn = item.find('text').at(4).text();
       const actualOutput =
           `${dateColumn} ${fromColoumn} ${toColoumn} ${descriptionColumn} ${amountColumn}`;
-      const expectedOutput = '12/12/12 iqbal doni debt 600000';
+      const expectedOutput = 'Wednesday, 12/12/2012, 12:00:00 am Rp.600000,- From : iqbal To : doni debt';
       expect(actualOutput).toBe(expectedOutput);
     });
   });

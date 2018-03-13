@@ -1,6 +1,6 @@
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import LoginForm from '../components/LoginForm';
+import LoginForm from '../js/components/LoginForm';
 
 describe('LoginForm', () => {
   describe('#handleInputUsername', () => {

@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import TransactionDesktop from '../../components/Transaction/TransactionDesktop';
-import TransactionItemDesktop from '../../components/Transaction/TransactionItemDesktop';
+import TransactionDesktop from '../../js/components/Transaction/TransactionDesktop';
+import TransactionItemDesktop from '../../js/components/Transaction/TransactionItemDesktop';
 
 describe('TransactionDesktop', () => {
   describe('#render', () => {
