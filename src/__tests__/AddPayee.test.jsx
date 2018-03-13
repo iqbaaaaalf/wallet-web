@@ -56,4 +56,15 @@ describe('AddPayee', () => {
       expect(wrapper.state('errorInvalid')).toEqual('Invalid Wallet Id');
     });
   });
+  describe('handleInputOnPayee', () => {
+    it('should display payee user', () => {
+      const wrapper = shallow(<AddPayee/>);
+      const payeelist =[{
+        username : 'iqbal',
+      }];
+      wrapper.setState(payeelist);
+      const username = wrapper.find('.payee');
+      expect(username.text()).toEqual('iqbal');
+    });
+  });
 });
