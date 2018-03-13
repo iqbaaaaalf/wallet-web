@@ -69,4 +69,49 @@ p {
     font-weight: bold;
 }
 
+.transaction-display-mobile > .card{
+    padding: 5px 10px;
+}
+
+@media screen and (min-width: 0px) {
+    .transaction-display-desktop {
+        display: none;
+    }
+
+    .transaction-display-mobile {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .transaction-display-desktop {
+        display: block;
+    }
+
+    .transaction-display-mobile {
+        display: none;
+    }
+}
+.transaction-item-mobile__date{
+    display: inline-flex;
+    font-size: 14px;
+}
+.transaction-item-mobile__from-wallet{
+
+}
+.transaction-item-mobile__to-wallet{
+
+}
+.transaction-item-mobile__description{
+
+}
+.transaction-item-mobile__amount {
+    font-size: 30px;
+    font-weight: bold;
+    display: inline-flex;
+}
+
+
+
+
 

@@ -26,5 +26,19 @@ describe('TransactionItemMobile', () => {
       const expectedOutput = '12/12/12 iqbal doni debt 600000';
       expect(actualOutput).toBe(expectedOutput);
     });
+    it('should display transaction TopUp', () => {
+      const transactionData = [
+        {
+          date: '12/12/12',
+          FromWallet: { User: { name: 'iqbal' } },
+          ToWallet: null,
+          description: 'debt',
+          amount: '600000',
+        } ];
+
+      const wrapper = mount(<TransactionItemMobile transactionCollection={transactionData}/>);
+      const transactionType = wrapper.find('#transactionType').text;
+      expect(transactionType).toEqual('Top Up');
+    });
   });
 });
