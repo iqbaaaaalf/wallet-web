@@ -1,6 +1,6 @@
 import React from 'react';
-import TransactionItemMobile from '../components/TransactionItemMobile';
-import TransactionMobile from '../components/TransactionMobile';
+import TransactionItemMobile from '../../js/components/Transaction/TransactionItemMobile';
+import TransactionMobile from '../../js/components/Transaction/TransactionMobile';
 import { shallow } from 'enzyme';
 
 
