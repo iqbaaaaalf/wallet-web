@@ -9,14 +9,6 @@ export default class UserName extends Component {
     };
   }
 
-  componentDidMount() {
-    axios.get('http://localhost:3000/users').then((response) => {
-      this.setState({
-        name: response.data.name,
-      });
-    });
-  }
-
   render() {
     return (
         <div id={'username'} className="Name">

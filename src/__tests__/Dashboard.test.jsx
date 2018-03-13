@@ -1,44 +1,18 @@
-import { shallow,mount } from 'enzyme/build/index';
-import moxios from 'moxios';
+import { shallow } from 'enzyme/build/index';
 import React from 'react';
 import Dashboard from '../components/Dashboard';
+import UserBalance from '../components/UserBalance';
+import UserName from '../components/UserName';
 
 describe('Dashboard', () => {
-  beforeEach(() => {
-    moxios.install();
-  });
-  afterEach(() => {
-    moxios.uninstall();
-  });
-  describe('#ShowData', () => {
-    it('with name and balance of username', () => {
+  describe('render', function() {
+    it('should render Dashboard Name Component', () => {
       const wrapper = shallow(<Dashboard/>);
-      const data = {
-        name: 'iqbal',
-        balance: '400000',
-      };
-      wrapper.setState(data);
-      const heading = wrapper.find('h1');
-      const balance = wrapper.find('span');
-      expect(heading.text()).toBe(`iqbal`);
-      expect(balance.text()).toBe('400000');
+      expect(wrapper.contains(<UserName/>)).toEqual(true);
     });
-  });
-  describe('fetch data', () => {
-    it('should fetch balance data', (done) => {
-      const wrapper = mount(<Dashboard/>);
-      const response = {balance:10000};
-
-      moxios.wait(() => {
-        let request = moxios.requests.mostRecent();
-        request.respondWith({
-          status: 200,
-          response: response,
-        }).then(() => {
-          expect(wrapper.state('balance')).toEqual(10000);
-          done();
-        });
-      });
+    it('should render Dashboard Balance Component', () => {
+      const wrapper = shallow(<Dashboard/>);
+      expect(wrapper.contains(<UserBalance/>)).toEqual(true);
     });
   });
 });

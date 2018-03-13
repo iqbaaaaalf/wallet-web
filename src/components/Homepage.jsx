@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import TransactionDesktop from './TransactionDesktop';
-import TransactionMobile from './TransactionMobile';
+import TransactionDesktop from './Transaction/TransactionDesktop';
+import TransactionMobile from './Transaction/TransactionMobile';
 
 export default class Homepage extends Component {
   constructor(props) {
