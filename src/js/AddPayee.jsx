@@ -6,25 +6,25 @@ export default class AddPayee extends Component {
     super(props);
     this.state = {
       payee: '',
-      errorInvalid: '',
+      message: '',
       username: '',
     };
     this._onChangeText = this._onChangeText.bind(this);
     this._onClickButtonSearch = this._onClickButtonSearch.bind(this);
-    this._handleInputOnPayee = this._handleInputOnPayee.bind(this);
+    this._onClickButtonAdd = this._onClickButtonAdd.bind(this);
   }
 
   _onChangeText(event) {
     this.setState({
       username: event.target.value,
-      errorInvalid: '',
+      message: '',
     });
   }
 
   _onClickButtonSearch() {
     this.setState({
       payee: '',
-      errorInvalid: '',
+      message: '',
     });
     const { username } = this.state;
     axios.get(`http://localhost:3000/users?username=${username}`).then((response) => {
@@ -33,22 +33,34 @@ export default class AddPayee extends Component {
       });
     }).catch((e) => {
       this.setState({
-        errorInvalid: e.response.data.message,
+        message: e.response.data.message,
       });
     });
   }
 
-  _handleInputOnPayee() {
+  _onClickButtonAdd() {
+    const { username } = this.state;
+    axios.post('http://localhost:3000/users/1362/payees', {
+      username: username,
+    }).then((response) => {
+      this.setState({
+        message: 'Success',
+      });
+    }).catch((e) => {
+      this.setState({
+        message: e.response.data.message,
+      });
+    });
   };
 
   render() {
-    const { payee, username, errorInvalid } = this.state;
+    const { payee, username, message } = this.state;
     return (
         <section>
           <div className="card border-primary mb-3 col-4 align-content-lg-center">
-            <div className="card-header">ADD Payee</div>
+            <div className="card-header">Add Payee</div>
             <div className="card-body text-primary">
-              <p>{errorInvalid}</p>
+              <p>{message}</p>
               <input type="text" id="username" onChange={this._onChangeText}
                      value={username} />
               <button type="submit" id="searchPayee" className="submit btn-primary"
@@ -56,8 +68,8 @@ export default class AddPayee extends Component {
               </button>
               {payee !== '' ? <div>
                 <p className="payee">{payee.name}</p>
-                <button type="submit" className="payeeExist"
-                        onClick={this._handleInputOnPayee}>Add
+                <button type="submit" id="addPayee" className="payeeExist"
+                        onClick={this._onClickButtonAdd}>Add
                 </button>
               </div> : null
               }

@@ -35,18 +35,18 @@ describe('AddPayee', () => {
       expect(wrapper.state('username')).toBe('ali');
     });
 
-    it('should reset errorInvalid state when user input username', () => {
+    it('should reset message state when user input username', () => {
       const wrapper = shallow(<AddPayee />);
       const inputPayee = wrapper.find('#username');
       wrapper.setState({
-        errorInvalid: 'User Not Found',
+        message: 'User Not Found',
       });
       inputPayee.simulate('change', {
         target: {
           value: 'ali',
         },
       });
-      expect(wrapper.state('errorInvalid')).toBe('');
+      expect(wrapper.state('message')).toBe('');
     });
   });
 
@@ -65,14 +65,14 @@ describe('AddPayee', () => {
       expect(wrapper.state('payee')).toEqual('');
     });
 
-    it('should reset errorInvalid state when button search clicked', () => {
+    it('should reset message state when button search clicked', () => {
       const wrapper = mount(<AddPayee />);
       wrapper.setState({
-        errorInvalid: 'User Not Found',
+        message: 'User Not Found',
       });
       const searchButton = wrapper.find('#searchPayee');
       searchButton.simulate('click');
-      expect(wrapper.state('errorInvalid')).toEqual('');
+      expect(wrapper.state('message')).toEqual('');
     });
 
     it('should change payee state when button search clicked', (done) => {
@@ -100,7 +100,7 @@ describe('AddPayee', () => {
       });
     });
 
-    it('should change errorInvalid state when specified username not found', (done) => {
+    it('should change message state when specified username not found', (done) => {
       const wrapper = mount(<AddPayee />);
       wrapper.setState({
         username: 'eddocipa',
@@ -117,52 +117,65 @@ describe('AddPayee', () => {
           status: 404,
           response: response,
         }).then(() => {
-          expect(wrapper.state('errorInvalid')).toEqual(response.message);
+          expect(wrapper.state('message')).toEqual(response.message);
+          done();
+        });
+      });
+    });
+  });
+
+  describe('onClickButtonAdd', () => {
+    it('should change message state to Success when success add payee', (done) => {
+      const wrapper = mount(<AddPayee />);
+      wrapper.setState({
+        payee: {
+          id: 2,
+          username: 'runner29',
+          name: 'Runner',
+        },
+      });
+      const button = wrapper.find('#addPayee');
+      button.simulate('click');
+      const response = {
+        user_id: 1,
+        friend_id: 2,
+      };
+      moxios.wait(() => {
+        let request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: response,
+        }).then(() => {
+          expect(wrapper.state('message')).toEqual('Success');
           done();
         });
       });
     });
 
-    it('should call callback after submit button', () => {
-      const mockFunction = jest.fn();
-      const wrapper = mount(<AddPayee onSubmit={mockFunction} />);
-      const submit = wrapper.find('.submit');
-      submit.simulate('click');
-      expect(mockFunction).toHaveBeenCalled();
-    });
-    it('should call callback with given data', () => {
-      const mockData = {
-        payee: 'aliando',
+    it('should change message state to Payee Already Exist when add same payee', (done) => {
+      const wrapper = mount(<AddPayee />);
+      wrapper.setState({
+        payee: {
+          id: 2,
+          username: 'runner29',
+          name: 'Runner',
+        },
+      });
+      const button = wrapper.find('#addPayee');
+      button.simulate('click');
+      const response = {
+        message: 'Payee Already Exist',
       };
-      const mockFunction = jest.fn();
-      const wrapper = mount(<AddPayee onSubmit={mockFunction} />);
-      const submit = wrapper.find('.submit');
-      wrapper.setState(mockData);
-      submit.simulate('click');
-      expect(mockFunction).toHaveBeenCalled();
-      expect(mockFunction).toHaveBeenLastCalledWith(mockData);
-    });
-    it('should change state of errorInvalid when walletId on addPayee is empty', () => {
-      const mockData = {
-        payee: '',
-      };
-      const wrapper = mount(<AddPayee onSubmit={jest.fn()} />);
-      const submit = wrapper.find('.submit');
-      wrapper.setState(mockData);
-      submit.simulate('click');
-      expect(wrapper.state('errorInvalid')).toEqual('Invalid Wallet Id');
-    });
-  });
-  describe('handleInputOnPayee', () => {
-    it('should display payee user', () => {
-      const wrapper = shallow(<AddPayee />);
-      const payeelist = [
-        {
-          username: 'iqbal',
-        } ];
-      wrapper.setState(payeelist);
-      const username = wrapper.find('.payee');
-      expect(username.text()).toEqual('iqbal');
+      moxios.wait(() => {
+        let request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 409,
+          response: response,
+        }).then(() => {
+          expect(wrapper.state('message')).toEqual('Payee Already Exist');
+          done();
+        });
+      });
     });
   });
 });
