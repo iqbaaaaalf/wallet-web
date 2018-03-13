@@ -1,9 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {shallow} from 'enzyme';
 import App from '../js/components/App';
+import Navigation from '../js/components/Navigation/Navigation';
+import Stage from '../js/components/Navigation/Stage';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('App', function() {
+  it('should render Navigation',() => {
+    const wrapper = shallow(<App/>);
+    expect(wrapper.contains(<Navigation/>)).toEqual(true);
+  });
+  it('should render Stage',() => {
+    const wrapper = shallow(<App/>);
+    expect(wrapper.contains(<Stage/>)).toEqual(true);
+  });
 });
