@@ -12,7 +12,7 @@ describe('AddPayee', () => {
     moxios.uninstall();
   });
 
-  describe('onChangeText', () => {
+  describe('_onChangeText', () => {
     it('should change username state to andi when user input username andi', () => {
       const wrapper = shallow(<AddPayee />);
       const inputPayee = wrapper.find('#username');
@@ -50,7 +50,7 @@ describe('AddPayee', () => {
     });
   });
 
-  describe('onClickButtonSearch', () => {
+  describe('_onClickButtonSearch', () => {
     it('should reset payee state when button search clicked', () => {
       const wrapper = mount(<AddPayee />);
       wrapper.setState({
@@ -124,7 +124,7 @@ describe('AddPayee', () => {
     });
   });
 
-  describe('onClickButtonAdd', () => {
+  describe('_onClickButtonAdd', () => {
     it('should change message state to Success when success add payee', (done) => {
       const wrapper = mount(<AddPayee />);
       wrapper.setState({
