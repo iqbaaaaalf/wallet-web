@@ -27,7 +27,7 @@ describe('Homepage', () => {
   describe('render', () => {
     it('should contains Transaction', () => {
       const wrapper = shallow(<Homepage/>);
-      expect(wrapper.contains(<Transaction/>)).toBe(true);
+      expect(wrapper.find(Transaction).length).toBe(1);
     });
   });
 });

@@ -3,18 +3,24 @@ import { link } from 'react-router-dom';
 import '../../../node_modules/bootstrap/dist/css/bootstrap-grid.css';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../../styles/App.css';
-import Stage from './Navigation/Stage';
-import Dashboard from './Dashboard';
 import Navigation from './Navigation/Navigation';
+import Stage from './Navigation/Stage';
 
 class App extends Component {
   render() {
     return (
         <div className="App">
-          <Navigation/>
-          <Stage/>
+          <div className={'row'}>
+            <div className={'col-3 align-self-center'}>
+              <Navigation/>
+            </div>
+            <div className={'col'}>
+              <Stage/>
+            </div>
+          </div>
         </div>
-    );
+    )
+        ;
   }
 }
 
