@@ -17,5 +17,6 @@ test:
 lint:
   image: chetankothari/js-pronto
   stage: lint
+  allow_failure: true
   script:
     - pronto run --exit-code -f gitlab -c origin/master
