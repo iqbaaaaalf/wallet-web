@@ -18,7 +18,7 @@ describe('Dashboard', () => {
       };
       wrapper.setState(data);
       const balance = wrapper.find('#wallet-balance');
-      expect(balance.text()).toBe('400000');
+      expect(balance.text()).toBe('Rp.400000,-');
     });
   });
   describe('fetch data', () => {

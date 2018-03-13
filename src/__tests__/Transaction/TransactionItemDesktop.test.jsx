@@ -22,7 +22,7 @@ describe('TransactionItemDesktop', () => {
       const amountColumn = item.find('td').at(4).text();
       const actualOutput =
           `${dateColumn} ${fromColoumn} ${toColoumn} ${descriptionColumn} ${amountColumn}`;
-      const expectedOutput = '12/12/12 iqbal doni debt 600000';
+      const expectedOutput = 'Wednesday, 12/12/2012, 12:00:00 am iqbal doni debt 600000';
       expect(actualOutput).toBe(expectedOutput);
     });
   });

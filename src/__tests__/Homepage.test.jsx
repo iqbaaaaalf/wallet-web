@@ -1,8 +1,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import Homepage from '../components/Homepage';
-import TransactionDesktop from '../components/TransactionDesktop';
-import TransactionMobile from '../components/TransactionMobile';
+import Transaction from '../components/Transaction/Transaction';
 
 describe('Homepage', () => {
   describe('#handleWelcome', () => {
@@ -12,7 +11,7 @@ describe('Homepage', () => {
         name : 'iqbal',
       };
       wrapper.setState(data);
-      const heading = wrapper.find('h1');
+      const heading = wrapper.find('#WelcomeMessage');
       expect(heading.text()).toBe(`Hello,iqbal`);
     });
     it('with another name of another username', () => {
@@ -21,15 +20,14 @@ describe('Homepage', () => {
         name : 'admin',
       };
       wrapper.setState(data);
-      const heading = wrapper.find('h1');
+      const heading = wrapper.find('#WelcomeMessage');
       expect(heading.text()).toBe(`Hello,admin`);
     });
   });
   describe('render', () => {
-    it('should contains TransactionDesktop and TransactionMobile', () => {
+    it('should contains Transaction', () => {
       const wrapper = shallow(<Homepage/>);
-      expect(wrapper.contains(<TransactionDesktop transactionCollection={[{date:'2018-05-'}]}/>)).toBe(true);
-      expect(wrapper.contains(<TransactionMobile/>)).toBe(true);
+      expect(wrapper.contains(<Transaction/>)).toBe(true);
     });
   });
 });

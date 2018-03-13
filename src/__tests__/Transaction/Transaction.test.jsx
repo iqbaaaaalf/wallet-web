@@ -12,14 +12,6 @@ describe('Transaction', () => {
   afterEach(() => {
     moxios.uninstall();
   });
-  describe('render', () => {
-    it('contains Transactiontable', () => {
-      const wrapper = shallow(<Transaction/>);
-      expect(wrapper.contains(<TransactionDesktop/>)).toEqual(true);
-      expect(wrapper.contains(<TransactionMobile/>)).toEqual(true);
-    });
-
-  });
   describe('#FetchData', () => {
     it('should fetch transaction data', (done) => {
       const wrapper = mount(<Transaction/>);

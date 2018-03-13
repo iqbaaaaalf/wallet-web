@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Transaction from './Transaction/Transaction';
 import TransactionDesktop from './Transaction/TransactionDesktop';
 import TransactionMobile from './Transaction/TransactionMobile';
 
@@ -13,26 +14,12 @@ export default class Homepage extends Component {
     };
   }
 
-  componentDidMount() {
-    axios.get('http://localhost:3000/wallets/1/transactions?size=1').then((response) => {
-      this.setState({
-        transactionCollection: response.data,
-      });
-    });
-    axios.get('http://localhost:3000/users/1/wallets').then((response) =>{
-      this.setState({
-        balance: response.data.balance,
-      });
-    });
-  }
-
   render() {
     return (
         <div>
           <h1 className="welcome" id="WelcomeMessage">Hello,{this.state.name}</h1>
           <h1 className="balance" id="Balance">Balance :{this.state.balance}</h1>
-          <TransactionDesktop transactionCollection={this.state.transactionCollection}/>
-          <TransactionMobile transactionCollection={this.state.transactionCollection}/>
+          <Transaction/>
         </div>
     );
   }
