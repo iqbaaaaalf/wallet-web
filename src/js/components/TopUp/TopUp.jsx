@@ -8,6 +8,7 @@ export default class TopUp extends Component{
       errorInvalid: '',
     };
     this._handleAmountTopUp = this._handleAmountTopUp.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
   _handleAmountTopUp(event){
@@ -16,6 +17,19 @@ export default class TopUp extends Component{
     });
   }
 
+  _handleSubmit(){
+    const { amount } = this.state;
+    const data = {
+      amount: amount,
+    };
+
+    if ( amount === ''){
+      this.setState({
+        errorInvalid: 'Invalid amount'
+      });
+    }
+    this.props.onSubmit(data);
+  }
 
   render(){
     const { amount } = this.state;

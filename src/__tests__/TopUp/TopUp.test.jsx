@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import TopUpWallet from '../../js/components/TopUp/TopUp';
 
 describe('TopUpWallet', () => {
@@ -23,6 +23,31 @@ describe('TopUpWallet', () => {
         },
       });
       expect(wrapper.state('amount')).toBe('34000000');
+    });
+  });
+  describe('handleSubmit', () => {
+    it('should call callback with given data', () => {
+      const mockData = {
+        amount : '300000',
+      };
+      const mockFunction = jest.fn();
+      const wrapper = mount(<TopUpWallet onSubmit={mockFunction}/>);
+      const submit = wrapper.find('.submit');
+      wrapper.setState(mockData);
+      submit.simulate('click');
+      expect(mockFunction).toHaveBeenCalled();
+      expect(mockFunction).toHaveBeenLastCalledWith(mockData);
+    });
+    it('should call errorInvalid when amount is empty', () => {
+      const mockData = {
+        amount : '',
+      };
+      const mockFunction = jest.fn();
+      const wrapper = mount(<TopUpWallet onSubmit={mockFunction}/>);
+      const submit = wrapper.find('.submit');
+      wrapper.setState(mockData);
+      submit.simulate('click');
+      expect(wrapper.state('errorInvalid')).toEqual('Invalid amount')
     });
   });
 });
