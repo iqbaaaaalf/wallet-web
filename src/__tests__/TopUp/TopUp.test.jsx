@@ -3,6 +3,17 @@ import { shallow, mount } from 'enzyme';
 import TopUpWallet from '../../js/components/TopUp/TopUp';
 
 describe('TopUpWallet', () => {
+  describe('handlebalance', () => {
+    it('should return balance of Wallet User', () => {
+      const wrapper = shallow(<TopUpWallet/>);
+      const data = {
+        balance : '15000',
+      };
+      wrapper.state(data);
+      const balance = wrapper.find('p');
+      expect(balance.text()).toEqual('15000');
+    });
+  });
   describe('handleAmountTopUp', () => {
     it('Should return correct amount when user input top up', () => {
       const wrapper = shallow(<TopUpWallet />);

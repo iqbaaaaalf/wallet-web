@@ -6,6 +6,7 @@ export default class TopUp extends Component{
     this.state = {
       amount: '',
       errorInvalid: '',
+      balance : '15000',
     };
     this._handleAmountTopUp = this._handleAmountTopUp.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
@@ -35,8 +36,8 @@ export default class TopUp extends Component{
     const { amount } = this.state;
     return(
         <div>
-          <label htmlFor="wallet">Wallet : </label>
-          <p>{this.props.Wallet}</p>
+          <label>Balance : </label>
+          <p className="balance">{this.state.balance}</p>
           <label htmlFor="amount">Amount: </label>
           <input type="text" className="amountTopUp" onChange={this._handleAmountTopUp} placeholder="ex:50000" value={amount}/>
           <button type="submit" className="submit" onClick={this._handleSubmit}>Top Up</button>
