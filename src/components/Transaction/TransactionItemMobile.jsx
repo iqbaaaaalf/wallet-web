@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import TransactionMobile from './TransactionMobile';
 
 export default class TransactionItemMobile extends Component{
   constructor(props){
@@ -17,3 +19,6 @@ export default class TransactionItemMobile extends Component{
     );
   }
 }
+TransactionItemMobile.propTypes = {
+  transactionCollection: PropTypes.array.required,
+};
