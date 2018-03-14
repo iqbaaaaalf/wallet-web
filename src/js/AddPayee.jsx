@@ -57,26 +57,28 @@ export default class AddPayee extends Component {
   render() {
     const { payee, username, message } = this.state;
     return (
+        <div className={'container'}>
         <section>
-          <div className="card border-primary mb-3 col-4 align-content-lg-center">
-            <div className="card-header">Add Payee</div>
-            <div className="card-body text-primary">
-              <p>{message}</p>
-              <input type="text" id="username" onChange={this._onChangeText}
-                     value={username} />
-              <button type="submit" id="searchPayee" className="submit btn-primary"
-                      onClick={this._onClickButtonSearch}> Search
-              </button>
-              {payee !== '' ? <div>
-                <p className="payee">{payee.name}</p>
-                <button type="submit" id="addPayee" className="payeeExist"
-                        onClick={this._onClickButtonAdd}>Add
+            <div className="card">
+              <div className="card-header">Add Payee</div>
+              <div className="card-body text-primary">
+                <p>{message}</p>
+                <input type="text" id="username" className={'form-control'} onChange={this._onChangeText}
+                       value={username} />
+                <button type="submit" id="searchPayee" className="submit btn-primary"
+                        onClick={this._onClickButtonSearch}> Search
                 </button>
-              </div> : null
-              }
+                {payee !== '' ? <div>
+                  <p className="payee">{payee.name}</p>
+                  <button type="submit" id="addPayee" className="payeeExist submit"
+                          onClick={this._onClickButtonAdd}>Add
+                  </button>
+                </div> : null
+                }
+              </div>
             </div>
-          </div>
         </section>
+        </div>
     );
   }
 

@@ -1,5 +1,64 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Roboto';
+  /*font-family: sans-serif;*/
+}
+.footer{
+  background-color: #f58220;
+  height: 50px;
+  margin-top: 10px;
+}
+
+.footer p {
+  padding-top: 10px;
+  font-family: 'Roboto';
+}
+.header{
+  background-color: #f58220;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+img{
+  height: 100px;
+  padding: 10px;
+}
+.card-header{
+  background-color: #f58220;
+}
+.card{
+  background-color: #fef2e8;
+  border-color: #f58220 ;
+  font-style: Bold;
+  font-family: 'Roboto';
+}
+h1{
+  color: black;
+}
+.balance{
+  font-size: 24px;
+}
+.wallet-balance{
+  font-size: 24px;
+  font-style: inherit;
+}
+.filter-wrap{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.form-padding{
+  margin-right: 5px;
+  margin-top: 5px;
+}
+.space-left-title{
+  margin-left: 20px;
+}
+.submit{
+  margin-bottom: 10px;
+  background-color: #f58220;
+}
+.submit-payee{
+  margin-bottom: 10px;
+  background-color: #f58220;
 }
