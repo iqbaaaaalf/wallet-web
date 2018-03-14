@@ -79,7 +79,9 @@ export default class Transfer extends Component {
         payeeList: response.data,
       });
     }).catch((e) => {
-      console.log(e);
+      this.setState({
+        payeeList: [],
+      });
     });
   }
 

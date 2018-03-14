@@ -1,6 +1,7 @@
 import { mount, shallow } from 'enzyme';
 import moxios from 'moxios';
 import React from 'react';
+import Payeelist from '../../js/components/Transfer/Payeelist';
 import Transfer from '../../js/components/Transfer/Transfer';
 
 describe('Transfer', () => {
@@ -9,6 +10,36 @@ describe('Transfer', () => {
   });
   afterEach(() => {
     moxios.uninstall();
+  });
+
+  describe('componentDidMount', () => {
+    it('should change payeeList state after rendered', (done) => {
+      const wrapper = shallow(<Transfer />);
+      moxios.wait(() => {
+        let request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: [ { name: 'Test' } ],
+        }).then(() => {
+          expect(wrapper.state('payeeList')).toEqual([ { name: 'Test' } ]);
+          done();
+        });
+      });
+    });
+
+    it('should change payeeList state to empty array when error happen while get payee list',
+        (done) => {
+          const wrapper = shallow(<Transfer />);
+          moxios.wait(() => {
+            let request = moxios.requests.mostRecent();
+            request.respondWith({
+              status: 500,
+            }).then(() => {
+              expect(wrapper.state('payeeList')).toEqual([]);
+              done();
+            });
+          });
+        });
   });
 
   describe('handleFrom', () => {
@@ -46,6 +77,32 @@ describe('Transfer', () => {
         },
       });
       expect(wrapper.state('description')).toEqual('hello this is text');
+    });
+  });
+
+  describe('handle changing PayeeList', () => {
+    it('should change "to" state when payeeList changing', (done) => {
+      const wrapper = mount(<Transfer />);
+      const payeeListWrapper = wrapper.find(Payeelist);
+      const comboboxElement = payeeListWrapper.find('#comboPayee');
+      comboboxElement.simulate('change', {
+        target: {
+          value: 'dona',
+        },
+      });
+      const response = {
+        id: 1,
+      };
+      moxios.wait(() => {
+        let request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: response,
+        }).then(() => {
+          expect(wrapper.state('to').walletId).toEqual(1);
+          done();
+        });
+      });
     });
   });
 
@@ -93,7 +150,7 @@ describe('Transfer', () => {
           status: 406,
           response: {
             message: 'Insufficient Amount',
-          }
+          },
         }).then(() => {
           expect(wrapper.state('message')).toEqual('Insufficient Amount');
           done();
