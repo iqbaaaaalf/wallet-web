@@ -1,42 +1,50 @@
+import axios from 'axios/index';
 import React, { Component } from 'react';
+import Payeelist from './Payeelist';
 
-export default class Transfer extends Component{
-  constructor(props){
+export default class Transfer extends Component {
+  constructor(props) {
     super(props);
     this.state = {
-      from : 'Budi',
+      from: {
+        walletId: 1,
+      },
       to: '',
       amount: '',
       description: '',
       errorAmount: '',
       errorDescription: '',
+      payeeList: [],
+      message: '',
     };
     this._handleAmount = this._handleAmount.bind(this);
     this._handleDescription = this._handleDescription.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
   }
 
-
-  _handleAmount(event){
+  _handleAmount(event) {
     this.setState({
       amount: event.target.value,
-    })
+    });
   }
 
-  _handleDescription(event){
+  _handleDescription(event) {
     this.setState({
       description: event.target.value,
-    })
+    });
   }
 
-  _handleSubmit(){
-    const { from, to, amount, description} = this.state;
-    const data = {
-      from: from,
-      to: to,
-      amount: amount,
-      description: description,
-    };
+  _callback(wallet) {
+    this.setState({
+      to: {
+        walletId: wallet,
+      },
+    });
+  }
+
+  _handleSubmit(event) {
+    event.preventDefault();
+    const { from, to, amount, description } = this.state;
     if (amount === '') {
       this.setState({
         errorAmount: 'Amount is require',
@@ -47,15 +55,47 @@ export default class Transfer extends Component{
         errorDescription: 'Description is require',
       });
     }
-    this.props.onSubmit(data);
+
+    if (to !== '') {
+      axios.post(`http://localhost:3000/wallets/${from.walletId}/transactions`, {
+        amount: amount,
+        toWalletID: to.walletId,
+        fromWalletID: from.walletId,
+      }).then((response) => {
+        this.setState({
+          message: 'Success',
+        });
+      }).catch((e) => {
+        this.setState({
+          message: e.response.data.message,
+        });
+      });
+    }
   }
 
-  render(){
-    return(
-        <form>
-          <div className="card border-primary mb-3 align-content-lg-center">
-            <div className="card-header">Transfer</div>
-            <div className="card-body text-primary">
+  _getPayee() {
+    axios.get('http://localhost:3000/users/1/payees').then((response) => {
+      this.setState({
+        payeeList: response.data,
+      });
+    }).catch((e) => {
+      this.setState({
+        payeeList: [],
+      });
+    });
+  }
+
+  componentDidMount() {
+    this._getPayee();
+  }
+
+  render() {
+    return (
+        <div className="container">
+          <form>
+            <div className="card border-primary mb-3 align-content-lg-left">
+              <div className="card-header">Transfer</div>
+              {this.state.message !== '' ? <span>{this.state.message}</span> : null}
               <div className="row">
                 <div className="col">
                   <label htmlFor="from">From:</label>
@@ -64,53 +104,41 @@ export default class Transfer extends Component{
                   <span className="from">Budi</span>
                 </div>
               </div>
-            </div>
-            <br/>
-            <div className="row">
-              <div className="col">
-                <label htmlFor="To">To:</label>
+              <div className="row">
+                <div className="col">
+                  <label htmlFor="To">To:</label>
+                </div>
+                <div className="col-8">
+                  <Payeelist payeelisting={this.state.payeeList}
+                             callbackFunction={this._callback.bind(this)} />
+                </div>
               </div>
-              <div className="col-8">
-                <div className="dropdown">
-                  <button className="btn btn-secondary dropdown-toggle" type="button"
-                          id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="true">
-                    Receiver
+              <div className="row">
+                <div className="col">
+                  <label htmlFor="amount">Amount: </label>
+                </div>
+                <div className="col-8">
+                  <input type="text" className="amount" onChange={this._handleAmount} />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col">
+                  <label htmlFor="description">Description :</label>
+                </div>
+                <div className="col-8">
+                  <textarea className="description" onChange={this._handleDescription} />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col">
+                  <button type="submit" className="submit btn btn-secondary"
+                          onClick={this._handleSubmit}> Send
                   </button>
-                  <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a className="dropdown-item" href="#">Doni</a>
-                    <a className="dropdown-item" href="#">Dono</a>
-                    <a className="dropdown-item" href="#">Dona</a>
-                  </div>
                 </div>
               </div>
             </div>
-            <br/>
-            <div className="row">
-              <div className="col">
-                <label htmlFor="amount">Amount: </label>
-              </div>
-              <div className="col-8">
-                <input type="text" className="amount" onChange={this._handleAmount} />
-              </div>
-            </div>
-            <br/>
-            <div className="row">
-              <div className="col">
-                <label htmlFor="description">Description :</label>
-              </div>
-              <div className="col-8">
-                <textarea className="description" onChange={this._handleDescription}/>
-              </div>
-            </div>
-            <br/>
-            <div className="row">
-              <div className="col">
-                <button type="submit" className="submit btn btn-secondary" onClick={this._handleSubmit} > Send </button>
-              </div>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
     );
   }
 }
