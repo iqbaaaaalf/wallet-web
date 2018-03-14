@@ -15,6 +15,7 @@ export default class Transfer extends Component {
       errorAmount: '',
       errorDescription: '',
       payeeList: [],
+      message: '',
     };
     this._handleAmount = this._handleAmount.bind(this);
     this._handleDescription = this._handleDescription.bind(this);
@@ -61,7 +62,13 @@ export default class Transfer extends Component {
         toWalletID: to.walletId,
         fromWalletID: from.walletId,
       }).then((response) => {
+        this.setState({
+          message: 'Success',
+        });
       }).catch((e) => {
+        this.setState({
+          message: e.response.data.message,
+        });
       });
     }
   }
@@ -84,16 +91,15 @@ export default class Transfer extends Component {
     return (
         <div className="container">
           <form>
-            <div className="card border-primary mb-3 align-content-lg-center">
+            <div className="card border-primary mb-3 align-content-lg-left">
               <div className="card-header">Transfer</div>
-              <div className="card-body text-primary">
-                <div className="row">
-                  <div className="col">
-                    <label htmlFor="from">From:</label>
-                  </div>
-                  <div className="col-8">
-                    <span className="from">Budi</span>
-                  </div>
+              {this.state.message !== '' ? <span>{this.state.message}</span> : null}
+              <div className="row">
+                <div className="col">
+                  <label htmlFor="from">From:</label>
+                </div>
+                <div className="col-8">
+                  <span className="from">Budi</span>
                 </div>
               </div>
               <div className="row">

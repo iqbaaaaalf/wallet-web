@@ -17,7 +17,7 @@ export default class Payeelist extends Component {
     axios.get(`http://localhost:3000/users/${event.target.value}/wallets`).then((response) => {
       this.props.callbackFunction(response.data.id);
     }).catch((e) => {
-      console.log(e);
+
     });
   }
 
