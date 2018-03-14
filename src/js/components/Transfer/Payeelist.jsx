@@ -19,12 +19,11 @@ export default class Payeelist extends Component {
     }).catch((e) => {
       console.log(e);
     });
-
   }
 
   render() {
     return (
-        <select className="form-control" value={this.state.value} onChange={this._onChangeCombo}>
+        <select id="comboPayee" className="form-control" value={this.state.value} onChange={this._onChangeCombo}>
           <option value={''}>Receiver</option>
           {this.props.payeelisting.map((payee, index) => {
             return <option key={index} value={payee.id}>{payee.name}</option>;
