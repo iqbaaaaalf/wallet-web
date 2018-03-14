@@ -44,11 +44,10 @@ describe('Transfer', () => {
 
   describe('handleFrom', () => {
     it('should return Name of owner WalletId', () => {
-      const wrapper = shallow(<Transfer />);
-      const data = {
+      const wrapper = mount(<Transfer />);
+      wrapper.setState({
         name: 'Budi',
-      };
-      wrapper.state(data);
+      });
       const from = wrapper.find('span');
       expect(from.text()).toEqual('Budi');
     });

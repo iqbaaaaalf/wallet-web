@@ -8,7 +8,7 @@ export default class Transfer extends Component {
     super(props);
     this.state = {
       from: {
-        walletId: 1,
+        walletId: store.data.walletId,
       },
       to: '',
       amount: '',
@@ -17,6 +17,7 @@ export default class Transfer extends Component {
       errorDescription: '',
       payeeList: [],
       message: '',
+      name: store.data.name,
     };
     this._handleAmount = this._handleAmount.bind(this);
     this._handleDescription = this._handleDescription.bind(this);
@@ -107,7 +108,7 @@ export default class Transfer extends Component {
                   <label htmlFor="from">From:</label>
                 </div>
                 <div className="col-8">
-                  <span className="from">{store.data.name}</span>
+                  <span className="from">{this.state.name}</span>
                   <button onClick={this._handleAddPayee} />
                 </div>
               </div>
