@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
 class Navigation extends Component {
-  static PropTypes = {
+  static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
@@ -14,9 +14,9 @@ class Navigation extends Component {
         <nav className="container">
           <div className="card">
             <div className="nav flex-column nav-pills">
-              {console.log(this.props.location)}
-              <Link to={'/'}><a id="dashboard-link-home"
-                  className={`nav-link ${this.props.location.pathname === '/' ? 'active' : ''}`}
+              {console.log(this.props.location.state)}
+              <Link to={'/homepage'}><a id="dashboard-link-home"
+                  className={`nav-link ${this.props.location.pathname === '/homepage' ? 'active' : ''}`}
                   data-toggle="pill" href="#v-pills-home"
                   aria-controls="v-pills-home" aria-selected="true">Home</a></Link>
               <Link to={'/dashboard'}><a id="dashboard-link-dashboard"
