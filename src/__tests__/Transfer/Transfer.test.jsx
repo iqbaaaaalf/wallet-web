@@ -1,6 +1,8 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Transfer from '../../js/components/Transfer/Transfer';
+import Payeelist from '../../js/components/Transfer/Payeelist';
+
 
 describe('Transfer', () => {
   describe('handleFrom', () => {
@@ -15,14 +17,9 @@ describe('Transfer', () => {
     });
   });
   describe('handleReceiver', () => {
-    it('should return correct value of payee list ', () => {
+    it('should render payeelist', () => {
       const wrapper = shallow(<Transfer/>);
-      const data = {
-        name : 'Doni',
-      };
-      wrapper.state(data);
-      const to = wrapper.find('a').at(0);
-      expect(to.text()).toEqual('Doni');
+      expect(wrapper.contains(<Payeelist payeelisting={wrapper.state('payeeList')}/>)).toBe(true);
     });
   });
   describe('handleAmount', () => {

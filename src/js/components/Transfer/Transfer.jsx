@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Payeelist from './Payeelist';
 
 export default class Transfer extends Component{
   constructor(props){
@@ -10,6 +11,7 @@ export default class Transfer extends Component{
       description: '',
       errorAmount: '',
       errorDescription: '',
+      payeeList: [],
     };
     this._handleAmount = this._handleAmount.bind(this);
     this._handleDescription = this._handleDescription.bind(this);
@@ -71,18 +73,7 @@ export default class Transfer extends Component{
                 <label htmlFor="To">To:</label>
               </div>
               <div className="col-8">
-                <div className="dropdown">
-                  <button className="btn btn-secondary dropdown-toggle" type="button"
-                          id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="true">
-                    Receiver
-                  </button>
-                  <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a className="dropdown-item" href="#">Doni</a>
-                    <a className="dropdown-item" href="#">Dono</a>
-                    <a className="dropdown-item" href="#">Dona</a>
-                  </div>
-                </div>
+                <Payeelist payeelisting={this.state.payeeList}/>
               </div>
             </div>
             <br/>
