@@ -20,12 +20,12 @@ export default class Filter extends React.Component {
 
   render() {
     return (
-        <div className='container query-form'>
+        <div className='query-form'>
           <div className='row'>
             <div className='col'>
               <FilterQuery onChange={this.updateQuery} value={this.state.query}/>
             </div>
-            <div>
+            <div className='col'>
               <FilterAmount/>
             </div>
           </div>
