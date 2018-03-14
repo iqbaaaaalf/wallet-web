@@ -1,6 +1,7 @@
 import axios from 'axios/index';
 import moment from 'moment';
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Payeelist from './Payeelist';
 
 export default class Transfer extends Component {
@@ -21,6 +22,7 @@ export default class Transfer extends Component {
     this._handleAmount = this._handleAmount.bind(this);
     this._handleDescription = this._handleDescription.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
+    this._handleAddPayee = this._handleAddPayee.bind(this);
   }
 
   _handleAmount(event) {
@@ -91,6 +93,10 @@ export default class Transfer extends Component {
     this._getPayee();
   }
 
+  _handleAddPayee() {
+    this.props.history.push('/addPayee');
+  }
+
   render() {
     return (
         <div className="container">
@@ -104,6 +110,7 @@ export default class Transfer extends Component {
                 </div>
                 <div className="col-8">
                   <span className="from">Budi</span>
+                  <button onClick={this._handleAddPayee} />
                 </div>
               </div>
               <div className="row">
@@ -143,4 +150,4 @@ export default class Transfer extends Component {
         </div>
     );
   }
-}
+};
