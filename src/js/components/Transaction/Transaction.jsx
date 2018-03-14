@@ -47,7 +47,6 @@ export default class Transaction extends Component {
     }
 
     axios.get(url).then((response) => {
-      console.log(response.data);
       this.setState({
         transactionCollection: response.data,
       });

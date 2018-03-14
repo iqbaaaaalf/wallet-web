@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import store from 'simple-global-store';
 
 export default class TopUp extends Component {
   constructor(props) {
@@ -7,7 +8,6 @@ export default class TopUp extends Component {
     this.state = {
       amount: '',
       message: '',
-      userId: '1',
     };
     this._handleAmountTopUp = this._handleAmountTopUp.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
@@ -20,7 +20,7 @@ export default class TopUp extends Component {
   }
 
   _handleSubmit() {
-    const { amount, userId } = this.state;
+    const { amount } = this.state;
     let valid = true;
     if (amount === '') {
       valid = false;
@@ -37,7 +37,7 @@ export default class TopUp extends Component {
     }
 
     if (valid) {
-      axios.post(`http://localhost:3000/users/${userId}/wallets`, {
+      axios.post(`http://localhost:3000/users/${store.data.userId}/wallets`, {
         amount: Number(amount),
       }).then((response) => {
         this.setState({

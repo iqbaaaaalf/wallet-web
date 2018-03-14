@@ -12,7 +12,7 @@ export default class Stage extends Component {
     return (
         <main>
           <Switch>
-            {/*<Route exact path='/' component={LoginForm}/>*/}
+            <Route exact path='/' component={LoginForm}/>
             <Route exact path='/homepage' component={Homepage}/>
             <Route exact path='/dashboard' component={Dashboard}/>
             <Route exact path='/transfer' component={Transfer}/>

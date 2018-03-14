@@ -1,6 +1,6 @@
 import axios from 'axios/index';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import store from 'simple-global-store';
 import Payeelist from './Payeelist';
 
 export default class Transfer extends Component {
@@ -76,7 +76,7 @@ export default class Transfer extends Component {
   }
 
   _getPayee() {
-    axios.get('http://localhost:3000/users/1/payees').then((response) => {
+    axios.get(`http://localhost:3000/users/${store.data.userId}/payees`).then((response) => {
       this.setState({
         payeeList: response.data,
       });
@@ -107,7 +107,7 @@ export default class Transfer extends Component {
                   <label htmlFor="from">From:</label>
                 </div>
                 <div className="col-8">
-                  <span className="from">Budi</span>
+                  <span className="from">{store.data.name}</span>
                   <button onClick={this._handleAddPayee} />
                 </div>
               </div>
