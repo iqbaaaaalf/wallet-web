@@ -1,23 +1,13 @@
+import moxios from 'moxios';
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import TopUpWallet from '../../js/components/TopUp/TopUp';
+import TopUp from '../../js/components/TopUp/TopUp';
 
 describe('TopUpWallet', () => {
-  describe('handlebalance', () => {
-    it('should return balance of Wallet User', () => {
-      const wrapper = shallow(<TopUpWallet/>);
-      const data = {
-        balance : '15000',
-      };
-      wrapper.state(data);
-      const balance = wrapper.find('p');
-      expect(balance.text()).toEqual('15000');
-    });
-  });
   describe('handleAmountTopUp', () => {
     it('Should return correct amount when user input top up', () => {
-      const wrapper = shallow(<TopUpWallet />);
-      const inputAmount = wrapper.find('.amountTopUp');
+      const wrapper = shallow(<TopUp />);
+      const inputAmount = wrapper.find('#amount');
       inputAmount.simulate('change', {
         target: {
           value: '12300000'
@@ -26,8 +16,8 @@ describe('TopUpWallet', () => {
       expect(wrapper.state('amount')).toBe('12300000');
     });
     it('Should return another correct amount when user input top up', () => {
-      const wrapper = shallow(<TopUpWallet />);
-      const inputAmount = wrapper.find('.amountTopUp');
+      const wrapper = shallow(<TopUp />);
+      const inputAmount = wrapper.find('#amount');
       inputAmount.simulate('change', {
         target: {
           value: '34000000'
@@ -37,28 +27,55 @@ describe('TopUpWallet', () => {
     });
   });
   describe('handleSubmit', () => {
-    it('should call callback with given data', () => {
-      const mockData = {
-        amount : '300000',
-      };
-      const mockFunction = jest.fn();
-      const wrapper = mount(<TopUpWallet onSubmit={mockFunction}/>);
-      const submit = wrapper.find('.submit');
-      wrapper.setState(mockData);
-      submit.simulate('click');
-      expect(mockFunction).toHaveBeenCalled();
-      expect(mockFunction).toHaveBeenLastCalledWith(mockData);
-    });
-    it('should call errorInvalid when amount is empty', () => {
+    it('should change state message to Amount Required when amount is empty', () => {
       const mockData = {
         amount : '',
       };
-      const mockFunction = jest.fn();
-      const wrapper = mount(<TopUpWallet onSubmit={mockFunction}/>);
-      const submit = wrapper.find('.submit');
+      const wrapper = mount(<TopUp />);
+      const submit = wrapper.find('#submit');
       wrapper.setState(mockData);
       submit.simulate('click');
-      expect(wrapper.state('errorInvalid')).toEqual('Invalid amount')
+      expect(wrapper.state('message')).toEqual('Amount Required');
+    });
+
+    it('should change state message to Invalid Amount when amount is 0', () => {
+      const mockData = {
+        amount : '0',
+      };
+      const wrapper = mount(<TopUp />);
+      const submit = wrapper.find('#submit');
+      wrapper.setState(mockData);
+      submit.simulate('click');
+      expect(wrapper.state('message')).toEqual('Invalid Amount');
+    });
+
+    it('should change state message to Invalid Amount when amount is lesser than 0', () => {
+      const mockData = {
+        amount : '-111',
+      };
+      const wrapper = mount(<TopUp />);
+      const submit = wrapper.find('#submit');
+      wrapper.setState(mockData);
+      submit.simulate('click');
+      expect(wrapper.state('message')).toEqual('Invalid Amount');
+    });
+
+    it('should change message state to Success when success top up wallet', (done) => {
+      const wrapper = mount(<TopUp />);
+      wrapper.setState({
+        amount: '1000',
+      });
+      const button = wrapper.find('#submit');
+      button.simulate('click');
+      moxios.wait(() => {
+        let request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+        }).then(() => {
+          expect(wrapper.state('message')).toEqual('Success');
+          done();
+        });
+      });
     });
   });
 });

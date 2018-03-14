@@ -11,16 +11,15 @@ class App extends Component {
     return (
         <div className="App">
           <div className={'row'}>
-            <div className={'col-3 align-self-center'}>
+            <div className={'col-3 align-self-top'}>
               <Navigation/>
             </div>
-            <div className={'col'}>
+            <div className={'col-9'}>
               <Stage/>
             </div>
           </div>
         </div>
-    )
-        ;
+    );
   }
 }
 

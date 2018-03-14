@@ -29,7 +29,10 @@ class Navigation extends Component {
               '/transfer'
                   ? 'active'
                   : ''}`} data-toggle="pill" href="#v-pills-transfer"  aria-controls="v-pills-transfer" aria-selected="false">Transfer</a></Link>
-              {/*<Link to={'/transaction'}><a className="nav-link" data-toggle="pill" href="#v-pills-transaction"  aria-controls="v-pills-transaction" aria-selected="false">Transaction</a></Link>*/}
+              {<Link to={'/topUp'}><a className={`nav-link ${this.props.location.pathname ===
+              '/topUp'
+                  ? 'active'
+                  : ''}`} data-toggle="pill" href="#v-pills-transaction"  aria-controls="v-pills-transaction" aria-selected="false">Top Up</a></Link>}
               {/*<Link to={'/payee'}><a className="nav-link" data-toggle="pill" href="#v-pills-payeelist"  aria-controls="v-pills-payeelist" aria-selected="false">Payee List</a></Link>*/}
             </div>
           </div>
