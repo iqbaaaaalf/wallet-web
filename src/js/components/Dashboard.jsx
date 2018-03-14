@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Filter from './Filter/Filter';
 import Transaction from './Transaction/Transaction';
 import UserBalance from './UserBalance';
 import UserName from './UserName';
@@ -20,6 +21,7 @@ export default class Dashboard extends Component {
               <UserBalance/>
             </section>
           </div>
+          <Filter/>
           <Transaction walletNumber={1} limitFetching={5}/>
         </div>
     );

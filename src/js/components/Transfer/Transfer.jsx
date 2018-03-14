@@ -53,7 +53,7 @@ export default class Transfer extends Component{
   render(){
     return(
         <form>
-          <div className="card border-primary mb-3 col-4 align-content-lg-center">
+          <div className="card border-primary mb-3 align-content-lg-center">
             <div className="card-header">Transfer</div>
             <div className="card-body text-primary">
               <div className="row">

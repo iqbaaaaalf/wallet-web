@@ -11,14 +11,14 @@ export default class TransactionDesktop extends Component {
             <thead>
             <tr>
               <th>date</th>
-              <th>from</th>
-              <th>To</th>
+              <th>From/To</th>
+              <th>Debit/Credit</th>
               <th>description</th>
               <th>amount</th>
             </tr>
             </thead>
             <tbody>
-            <TransactionItemDesktop transactionCollection={this.props.transactionCollection}/>
+            <TransactionItemDesktop transactionCollection={this.props.transactionCollection} transactionWalletId={this.props.transactionWalletId}/>
             </tbody>
           </table>
         </div>
@@ -27,4 +27,5 @@ export default class TransactionDesktop extends Component {
 }
 TransactionDesktop.propTypes = {
   transactionCollection: PropTypes.array.required,
+  transactionWalletId: PropTypes.number.required,
 };

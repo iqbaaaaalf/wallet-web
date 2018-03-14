@@ -35,7 +35,7 @@ export default class TopUp extends Component{
   render(){
     const { amount } = this.state;
     return(
-        <div className="card border-primary mb-3 col-4 align-content-lg-center">
+        <div className="card border-primary mb-3 align-content-lg-center">
           <div className="card-header">Top Up Wallet</div>
           <div className="card-body text-primary">
             <div className="row">
