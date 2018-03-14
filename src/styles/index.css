@@ -1,7 +1,8 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Roboto';
+  /*font-family: sans-serif;*/
 }
 .footer{
   background-color: #f58220;
@@ -10,4 +11,24 @@ body {
 
 .footer p {
   padding-top: 10px;
+
+.header{
+  background-color: #f58220;
+  height: 100px;
+}
+img{
+  height: 100px;
+  padding: 10px;
+
+.card-header{
+  background-color: #f58220;
+}
+.card{
+  background-color: #fef2e8;
+  border-color: #f58220 ;
+  font-style: Bold;
+  font-family: 'Roboto';
+}
+h1{
+  color: black;
 }
