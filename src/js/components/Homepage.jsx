@@ -18,7 +18,6 @@ export default class Homepage extends Component {
     return (
         <div>
           <h1 className="welcome" id="WelcomeMessage">Hello,{this.state.name}</h1>
-          <h1 className="balance" id="Balance">Balance :{this.state.balance}</h1>
           <Transaction walletNumber={1}/>
         </div>
     );

@@ -24,11 +24,11 @@ export default class Transaction extends Component {
     });
   }
 
-
   render() {
     return (
         <div>
-          <TransactionDesktop transactionCollection={this.state.transactionCollection}/>
+          <TransactionDesktop transactionCollection={this.state.transactionCollection}
+                              transactionWalletId={this.props.walletNumber}/>
           <TransactionMobile transactionCollection={this.state.transactionCollection}/>
         </div>
     );
