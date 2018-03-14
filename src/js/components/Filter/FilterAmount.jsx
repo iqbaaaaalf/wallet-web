@@ -19,6 +19,7 @@ export default class FilterAmount extends React.Component {
   _onSubmitLesser() {
     const data = {
       filterAmountMethod: 'lesser',
+      amount: this.state.amount,
     };
     this.props.onClick(data);
   }
@@ -26,6 +27,7 @@ export default class FilterAmount extends React.Component {
   _onSubmitGreater() {
     const data = {
       filterAmountMethod: 'greater',
+      amount: this.state.amount,
     };
     this.props.onClick(data);
   }
@@ -58,5 +60,5 @@ export default class FilterAmount extends React.Component {
 }
 
 FilterAmount.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
