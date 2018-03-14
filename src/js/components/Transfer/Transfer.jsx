@@ -48,18 +48,28 @@ export default class Transfer extends Component {
   _handleSubmit(event) {
     event.preventDefault();
     const { from, to, amount, description } = this.state;
-    if (amount === '') {
-      this.setState({
-        errorAmount: 'Amount is require',
-      });
-    }
+    let valid = true;
     if (description === '') {
+      valid = false;
       this.setState({
         errorDescription: 'Description is require',
       });
     }
+    if (amount === '') {
+      valid = false;
+      this.setState({
+        errorAmount: 'Amount Required',
+      });
+    }
 
-    if (to !== '') {
+    if (amount !== '' && Number(amount) <= 0) {
+      valid = false;
+      this.setState({
+        message: 'Invalid Amount',
+      });
+    }
+
+    if (to !== '' && valid) {
       axios.post(`http://localhost:3000/wallets/${from.walletId}/transactions`, {
         amount: amount,
         toWalletID: to.walletId,
@@ -125,7 +135,7 @@ export default class Transfer extends Component {
                   <label htmlFor="amount">Amount: </label>
                 </div>
                 <div className="col-8">
-                  <input type="text" className="amount form-control "
+                  <input type="number" className="amount form-control "
                          onChange={this._handleAmount} />
                 </div>
               </div>

@@ -88,7 +88,7 @@ export default class LoginForm extends Component {
                 <div className="row justify-content-md-center">
                   <div className="form-group">
                     <label htmlFor="ErrorPassword">{this.state.errorPassword}</label>
-                    <input type="text" className="password form-control"
+                    <input type="password" className="password form-control"
                            onChange={this._handleInputPassword}
                            value={password} placeholder="Password" />
                   </div>
