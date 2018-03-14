@@ -1,4 +1,5 @@
 import axios from 'axios/index';
+import moment from 'moment';
 import React, { Component } from 'react';
 import Payeelist from './Payeelist';
 
@@ -58,6 +59,7 @@ export default class Transfer extends Component {
 
     if (to !== '') {
       axios.post(`http://localhost:3000/wallets/${from.walletId}/transactions`, {
+        date: moment().format(),
         amount: amount,
         toWalletID: to.walletId,
         fromWalletID: from.walletId,

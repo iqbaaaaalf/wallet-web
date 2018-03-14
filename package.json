@@ -12,7 +12,8 @@
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "simple-global-store": "^1.4.0-beta"
   },
   "scripts": {
     "lint": "eslint src",

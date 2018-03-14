@@ -9,8 +9,6 @@ export default class TransactionItemDesktop extends Component {
   render() {
     return this.props.transactionCollection.map((transaction, index) =>
         <tr key={index}>
-          {/*{console.log(transaction.FromWallet.id === null ? '' : transaction.FromWallet.id ===*/}
-          {/*this.props.transactionWalletId)}*/}
           <td>{moment(transaction.date).format('dddd, DD/MM/YYYY, h:mm:ss a')}</td>
           <td>
             {transaction.FromWallet === null ? '' : (transaction.FromWallet.id !==

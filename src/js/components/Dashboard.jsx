@@ -51,7 +51,6 @@ export default class Dashboard extends Component {
           <FilterQuery onChange={this.onSubmitFilterDesc.bind(this)}  value={this.state.query}/>
           <FilterAmount onClick={this.onUpdateFilterValue.bind(this)} />
           <Transaction walletNumber={1}
-                       limitFetching={5}
                        transactionFilterColumn={this.state.filterColumn}
                        transactionFilterMode={this.state.filterMode}
                        transactionFilterValue={this.state.filterValue}
