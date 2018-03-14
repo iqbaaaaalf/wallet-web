@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import FilterAmount from '../js/components/Filter/FilterAmount.jsx';
+import FilterAmount from '../../js/components/Filter/FilterAmount.jsx';
 
 describe('FilterQuery', () => {
   describe('#_onChangeInput', () => {
@@ -43,6 +43,7 @@ describe('FilterQuery', () => {
     it('should call callback with proper data if button lesser click', () => {
       const mockCallback = jest.fn();
       const mockData = {
+        amount: '',
         filterAmountMethod: 'lesser',
       };
       const wrapper = mount(<FilterAmount onChange={jest.fn()} onClick={mockCallback}/>);
@@ -69,6 +70,7 @@ describe('FilterQuery', () => {
     it('should call callback with proper data if button greater click', () => {
       const mockCallback = jest.fn();
       const mockData = {
+        amount: '',
         filterAmountMethod: 'greater',
       };
       const wrapper = mount(<FilterAmount onChange={jest.fn()} onClick={mockCallback}/>);
