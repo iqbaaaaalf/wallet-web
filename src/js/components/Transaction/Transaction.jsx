@@ -13,10 +13,12 @@ export default class Transaction extends Component {
   }
 
   componentDidMount() {
-    let url = `http://localhost:3000/wallets/${this.props.walletNumber}/transactions`;
+    let url = `http://localhost:3000/wallets/${this.props.walletNumber}/transactions?`;
+
     if (this.props.limitFetching !== undefined) {
-      url += `?size=${this.props.limitFetching}`;
+      url += `&size=${this.props.limitFetching}`;
     }
+
     axios.get(url).then((response) => {
       this.setState({
         transactionCollection: response.data,
@@ -24,26 +26,56 @@ export default class Transaction extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps){
+    let url = `http://localhost:3000/wallets/${this.props.walletNumber}/transactions?`;
+
+    if (nextProps.limitFetching !== undefined) {
+      url += `&size=${nextProps.limitFetching}`;
+    }
+
+    if (nextProps.transactionFilterColumn !== null) {
+      url +=`&filterBy=${nextProps.transactionFilterColumn}`;
+      if(nextProps.transactionFilterColumn === 'amount'){
+        url +=`&filterMode=${nextProps.transactionFilterMode}`;
+      }
+      url +=`&filterValue=${nextProps.transactionFilterValue}`;
+    }
+
+    if(nextProps.transactionSortColumn !== null){
+      url+= `&orderBy=${nextProps.transactionSortColumn}`;
+      url+= `&order=${nextProps.transactionSortValue}`;
+    }
+
+    axios.get(url).then((response) => {
+      console.log(response.data);
+      this.setState({
+        transactionCollection: response.data,
+      });
+    });
+  }
 
   render() {
     return (
         <div>
-          <TransactionDesktop transactionCollection={this.state.transactionCollection}/>
+          <TransactionDesktop transactionCollection={this.state.transactionCollection}
+                              transactionWalletId={this.props.walletNumber}/>
           <TransactionMobile transactionCollection={this.state.transactionCollection}/>
         </div>
     );
   }
 }
 Transaction.defaultProps = {
-  transactionFilterValue: '',
-  transactionFilterColumn: '',
-  transactionSortValue: '',
-  transactionSortColumn: '',
+  transactionFilterValue: null,
+  transactionFilterColumn: null,
+  transactionFilterMode: null,
+  transactionSortValue: null,
+  transactionSortColumn: null,
 };
 Transaction.propTypes = {
   walletNumber: PropTypes.number.required,
   limitFetching: PropTypes.number,
   transactionFilterValue: PropTypes.string,
+  transactionFilterMode: PropTypes.string,
   transactionFilterColumn: PropTypes.string,
   transactionSortValue: PropTypes.string,
   transactionSortColumn: PropTypes.string,
