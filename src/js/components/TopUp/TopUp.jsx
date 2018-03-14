@@ -7,7 +7,7 @@ export default class TopUp extends Component {
     this.state = {
       amount: '',
       message: '',
-      userId: '',
+      userId: '1',
     };
     this._handleAmountTopUp = this._handleAmountTopUp.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
