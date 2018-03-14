@@ -1,11 +1,22 @@
-import { shallow, mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
+import moxios from 'moxios';
 import React from 'react';
+import store from 'simple-global-store';
 import LoginForm from '../js/components/LoginForm';
 
 describe('LoginForm', () => {
+  beforeEach(() => {
+    moxios.install();
+    store.clear();
+  });
+
+  afterEach(() => {
+    moxios.uninstall();
+    store.clear();
+  });
   describe('#handleInputUsername', () => {
     it('should save name with Budi', () => {
-      const wrapper = shallow(<LoginForm/>);
+      const wrapper = shallow(<LoginForm />);
       const inputUserName = wrapper.find('.username');
       inputUserName.simulate('change', {
         target: {
@@ -15,7 +26,7 @@ describe('LoginForm', () => {
       expect(wrapper.state('username')).toBe('Budi');
     });
     it('should save name with Doni', () => {
-      const wrapper = shallow(<LoginForm/>);
+      const wrapper = shallow(<LoginForm />);
       const inputUserName = wrapper.find('.username');
       inputUserName.simulate('change', {
         target: {
@@ -27,7 +38,7 @@ describe('LoginForm', () => {
   });
   describe('#handleInputPassword', () => {
     it('should save password with 123456', () => {
-      const wrapper = shallow(<LoginForm/>);
+      const wrapper = shallow(<LoginForm />);
       const inputPassword = wrapper.find('.password');
       inputPassword.simulate('change', {
         target: {
@@ -37,7 +48,7 @@ describe('LoginForm', () => {
       expect(wrapper.state('password')).toEqual('123456');
     });
     it('should save password with 12000', () => {
-      const wrapper = shallow(<LoginForm/>);
+      const wrapper = shallow(<LoginForm />);
       const inputPassword = wrapper.find('.password');
       inputPassword.simulate('change', {
         target: {
@@ -48,20 +59,49 @@ describe('LoginForm', () => {
     });
   });
   describe('#handleInputOnSubmit', () => {
-    it('should call callback after submit button', () => {
+    it('should change store data when click submit button', (done) => {
       const mockFunction = jest.fn();
-      const wrapper = mount(<LoginForm onSubmit={mockFunction}/>);
-      const submit = wrapper.find('.submit');
-      submit.simulate('click');
-      expect(mockFunction).toHaveBeenCalled();
+      store.addChangeListener(mockFunction);
+      const wrapper = mount(<LoginForm />);
+      wrapper.setState({
+        username: 'iqbal',
+        password: 'admin',
+      });
+      const button = wrapper.find('.submit');
+      button.simulate('click');
+      moxios.wait(() => {
+        let request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response:
+              {
+                data: {
+                  data: {
+                    userId: 1,
+                    walletId: 1,
+                    name: 'test',
+                    isLoggedIn: true,
+                  },
+                },
+              },
+        }).then(() => {
+//          console.log(store);
+//          expect(store.data.userId).toEqual(1);
+//          expect(store.data.walletId).toEqual(1);
+//          expect(store.data.name).toEqual('test');
+//          expect(store.data.isLoggedIn).toEqual(true);
+          done();
+        });
+      });
     });
+
     it('should call callback with given data', () => {
       const mockData = {
         username: 'iqbaaaaalf',
         password: 'asdasd',
       };
       const mockFunction = jest.fn();
-      const wrapper = mount(<LoginForm onSubmit={mockFunction}/>);
+      const wrapper = mount(<LoginForm onSubmit={mockFunction} />);
       const submit = wrapper.find('.submit');
       wrapper.setState(mockData);
       submit.simulate('click');
@@ -73,7 +113,7 @@ describe('LoginForm', () => {
         username: '',
         password: 'asdasd',
       };
-      const wrapper = mount(<LoginForm onSubmit={jest.fn()}/>);
+      const wrapper = mount(<LoginForm onSubmit={jest.fn()} />);
       const submit = wrapper.find('.submit');
       wrapper.setState(mockData);
       submit.simulate('click');
@@ -84,7 +124,7 @@ describe('LoginForm', () => {
         username: 'admin',
         password: '',
       };
-      const wrapper = mount(<LoginForm onSubmit={jest.fn()}/>);
+      const wrapper = mount(<LoginForm onSubmit={jest.fn()} />);
       const submit = wrapper.find('.submit');
       wrapper.setState(mockData);
       submit.simulate('click');
@@ -95,7 +135,7 @@ describe('LoginForm', () => {
         username: '',
         password: '',
       };
-      const wrapper = mount(<LoginForm onSubmit={jest.fn()}/>);
+      const wrapper = mount(<LoginForm onSubmit={jest.fn()} />);
       const submit = wrapper.find('.submit');
       wrapper.setState(mockData);
       submit.simulate('click');

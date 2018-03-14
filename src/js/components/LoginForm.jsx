@@ -62,6 +62,7 @@ export default class LoginForm extends Component {
       store.update({userId: response.data.data.id, walletId: response.data.data.walletId, name: response.data.data.name, isLoggedIn: true});
       this.props.history.push('/homepage');
     }).catch((e) => {
+      console.log(e);
       this.setState({
         errorInvalid: e.response.data.message,
       });
@@ -78,7 +79,7 @@ export default class LoginForm extends Component {
                 <div className="avatar"></div>
                 <div className="row justify-content-md-center">
                   <div className="form-group">
-                    <label htmlFor="ErrorUsername"></label>
+                    <label htmlFor="ErrorUsername">{this.state.errorUsername}</label>
                     <input type="text" className="username form-control"
                            onChange={this._handleInputUsername}
                            value={username} placeholder="Username" />
@@ -86,7 +87,7 @@ export default class LoginForm extends Component {
                 </div>
                 <div className="row justify-content-md-center">
                   <div className="form-group">
-                    <label htmlFor="ErrorPassword"></label>
+                    <label htmlFor="ErrorPassword">{this.state.errorPassword}</label>
                     <input type="text" className="password form-control"
                            onChange={this._handleInputPassword}
                            value={password} placeholder="Password" />

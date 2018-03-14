@@ -71,6 +71,7 @@ class Navigation extends Component {
             </Link>
             <a className={'nav-link'}
                data-toggle="pill"
+               href="#v-pills-transaction"
                aria-controls="v-pills-transaction"
                aria-selected="false"
                onClick={this._doLogout.bind(this)}
