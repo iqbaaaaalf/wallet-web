@@ -14,7 +14,6 @@ class Navigation extends Component {
         <nav className="container">
           <div className="card">
             <div className="nav flex-column nav-pills">
-              {console.log(this.props.location.state)}
               <Link to={'/homepage'}><a id="dashboard-link-home"
                   className={`nav-link ${this.props.location.pathname === '/homepage' ? 'active' : ''}`}
                   data-toggle="pill" href="#v-pills-home"
@@ -33,7 +32,6 @@ class Navigation extends Component {
               '/topUp'
                   ? 'active'
                   : ''}`} data-toggle="pill" href="#v-pills-transaction"  aria-controls="v-pills-transaction" aria-selected="false">Top Up</a></Link>}
-              {/*<Link to={'/payee'}><a className="nav-link" data-toggle="pill" href="#v-pills-payeelist"  aria-controls="v-pills-payeelist" aria-selected="false">Payee List</a></Link>*/}
             </div>
           </div>
         </nav>
