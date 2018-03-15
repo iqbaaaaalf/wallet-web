@@ -16,6 +16,7 @@ export default class TopUp extends Component {
   _handleAmountTopUp(event) {
     this.setState({
       amount: event.target.value,
+      message: '',
     });
   }
 

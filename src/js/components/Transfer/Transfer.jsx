@@ -29,12 +29,14 @@ export default class Transfer extends Component {
   _handleAmount(event) {
     this.setState({
       amount: event.target.value,
+      message: '',
     });
   }
 
   _handleDescription(event) {
     this.setState({
       description: event.target.value,
+      message: '',
     });
   }
 
@@ -43,6 +45,7 @@ export default class Transfer extends Component {
       to: {
         walletId: wallet,
       },
+      message: '',
     });
   }
 
