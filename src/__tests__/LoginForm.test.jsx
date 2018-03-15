@@ -6,13 +6,13 @@ import LoginForm from '../js/components/LoginForm';
 
 describe('LoginForm', () => {
   beforeEach(() => {
-    moxios.install();
     store.clear();
+    moxios.install();
   });
 
   afterEach(() => {
-    moxios.uninstall();
     store.clear();
+    moxios.uninstall();
   });
   describe('#handleInputUsername', () => {
     it('should save name with Budi', () => {
@@ -124,7 +124,7 @@ describe('LoginForm', () => {
         username: 'admin',
         password: '',
       };
-      const wrapper = mount(<LoginForm onSubmit={jest.fn()} />);
+      const wrapper = mount(<LoginForm />);
       const submit = wrapper.find('.submit');
       wrapper.setState(mockData);
       submit.simulate('click');
@@ -135,7 +135,7 @@ describe('LoginForm', () => {
         username: '',
         password: '',
       };
-      const wrapper = mount(<LoginForm onSubmit={jest.fn()} />);
+      const wrapper = mount(<LoginForm />);
       const submit = wrapper.find('.submit');
       wrapper.setState(mockData);
       submit.simulate('click');

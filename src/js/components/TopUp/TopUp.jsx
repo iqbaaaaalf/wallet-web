@@ -65,12 +65,12 @@ export default class TopUp extends Component {
               </div>
               <div className="row">
                 <div className="col">
-                  <input type="number" id="amount" onChange={this._handleAmountTopUp}
+                  <input type="number" id="amount" className={'form-control'} onChange={this._handleAmountTopUp}
                          placeholder="ex:50000"
                          value={amount} />
                 </div>
               </div>
-              <button type="submit" id="submit" className="submit" onClick={this._handleSubmit}>Top
+              <button type="submit" id="submit" className="submit btn btn-secondary" onClick={this._handleSubmit}>Top
                 Up
               </button>
             </div>

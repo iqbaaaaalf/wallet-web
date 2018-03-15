@@ -1,7 +1,7 @@
 import axios from 'axios';
 import md5 from 'md5';
-import store from 'simple-global-store';
 import React, { Component } from 'react';
+import store from 'simple-global-store';
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -33,24 +33,31 @@ export default class LoginForm extends Component {
 
   _handleInputOnSubmit(event) {
     event.preventDefault();
+    let valid = true;
     const { username, password } = this.state;
     if (username === '') {
+      valid = false;
       this.setState({
         errorUsername: 'username require',
       });
     }
 
     if (password === '') {
+      valid = false;
       this.setState({
         errorPassword: 'password require',
       });
     }
     if (username === '' && password === '') {
+      valid = false;
       this.setState({
         errorInvalid: 'username and password is required',
       });
     }
-    this._doLogin();
+
+    if (valid) {
+      this._doLogin();
+    }
   }
 
   _doLogin() {
@@ -59,7 +66,12 @@ export default class LoginForm extends Component {
       username: username,
       password: md5(password),
     }).then((response) => {
-      store.update({userId: response.data.data.id, walletId: response.data.data.walletId, name: response.data.data.name, isLoggedIn: true});
+      store.update({
+        userId: response.data.data.id,
+        walletId: response.data.data.walletId,
+        name: response.data.data.name,
+        isLoggedIn: true,
+      });
       this.props.history.push('/homepage');
     }).catch((e) => {
       console.log(e);

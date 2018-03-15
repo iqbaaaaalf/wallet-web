@@ -11,7 +11,7 @@ describe('Homepage', () => {
 
   afterEach(() => {
     store.clear();
-  })
+  });
   describe('#handleWelcome', () => {
     it('with name of username', () => {
       const mockFn = jest.fn();

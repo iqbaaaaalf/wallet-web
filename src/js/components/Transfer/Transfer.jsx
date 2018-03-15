@@ -1,4 +1,5 @@
 import axios from 'axios/index';
+import moment from 'moment';
 import React, { Component } from 'react';
 import store from 'simple-global-store';
 import Payeelist from './Payeelist';
@@ -58,19 +59,20 @@ export default class Transfer extends Component {
     if (amount === '') {
       valid = false;
       this.setState({
-        errorAmount: 'Amount Required',
+        errorAmount: 'Amount is require',
       });
     }
 
     if (amount !== '' && Number(amount) <= 0) {
       valid = false;
       this.setState({
-        message: 'Invalid Amount',
+        errorDescription: 'Description is require',
       });
     }
 
     if (to !== '' && valid) {
       axios.post(`http://localhost:3000/wallets/${from.walletId}/transactions`, {
+        date: moment().format(),
         amount: amount,
         toWalletID: to.walletId,
         fromWalletID: from.walletId,
@@ -144,7 +146,7 @@ export default class Transfer extends Component {
                   <label htmlFor="description">Description :</label>
                 </div>
                 <div className="col-8">
-                  <textarea className="description form-control "
+                  <textarea className="description form-control"
                             onChange={this._handleDescription} />
                 </div>
               </div>
