@@ -126,7 +126,7 @@ export default class Transfer extends Component {
                   <label htmlFor="amount">Amount: </label>
                 </div>
                 <div className="col-8">
-                  <input type="text" className="amount form-control "
+                  <input type="text" className="amount form-control"
                          onChange={this._handleAmount} />
                 </div>
               </div>
@@ -135,7 +135,7 @@ export default class Transfer extends Component {
                   <label htmlFor="description">Description :</label>
                 </div>
                 <div className="col-8">
-                  <textarea className="description form-control "
+                  <textarea className="description form-control"
                             onChange={this._handleDescription} />
                 </div>
               </div>
