@@ -50,23 +50,17 @@ export default class Transfer extends Component {
     event.preventDefault();
     const { from, to, amount, description } = this.state;
     let valid = true;
-    if (description === '') {
-      valid = false;
-      this.setState({
-        errorDescription: 'Description is require',
-      });
-    }
     if (amount === '') {
       valid = false;
       this.setState({
-        errorAmount: 'Amount is require',
+        message: 'Amount is require',
       });
     }
 
     if (amount !== '' && Number(amount) <= 0) {
       valid = false;
       this.setState({
-        errorAmount: 'Invalid amount',
+        message: 'Invalid amount',
       });
     }
 
@@ -80,7 +74,6 @@ export default class Transfer extends Component {
       }).then((response) => {
         this.setState({
           message: 'Success',
-          to: '',
           amount: '',
           description: '',
         });
@@ -94,8 +87,17 @@ export default class Transfer extends Component {
 
   _getPayee() {
     axios.get(`http://localhost:3000/users/${store.data.userId}/payees`).then((response) => {
-      this.setState({
-        payeeList: response.data,
+      const listPayee = response.data;
+      axios.get(`http://localhost:3000/users/${listPayee[ 0 ].id}/wallets`).then((response) => {
+            this.setState({
+              payeeList: listPayee,
+              to: {
+                walletId: response.data.id,
+              },
+            });
+          },
+      ).catch((e) => {
+        console.log(e);
       });
     }).catch((e) => {
       this.setState({
@@ -132,8 +134,11 @@ export default class Transfer extends Component {
                   <label htmlFor="To">To:</label>
                 </div>
                 <div className="col-8">
-                  <Payeelist payeelisting={this.state.payeeList}
-                             callbackFunction={this._callback.bind(this)}/>
+                  {this.state.payeeList.length === 0 ?
+                      <span>You don't have payee. Please add Payee first.</span>
+                      : <Payeelist payeelisting={this.state.payeeList}
+                                   callbackFunction={this._callback.bind(this)} />
+                  }
                 </div>
               </div>
               <div className="row form-padding">
@@ -142,7 +147,7 @@ export default class Transfer extends Component {
                 </div>
                 <div className="col-8">
                   <input type="number" min="0" className="amount form-control "
-                         onChange={this._handleAmount} value={this.state.amount}/>
+                         onChange={this._handleAmount} value={this.state.amount} />
                 </div>
               </div>
               <div className="row form-padding">
@@ -151,7 +156,7 @@ export default class Transfer extends Component {
                 </div>
                 <div className="col-8">
                   <textarea className="description form-control"
-                            onChange={this._handleDescription} value={this.state.description}/>
+                            onChange={this._handleDescription} value={this.state.description} />
                 </div>
               </div>
               <div className="row form-padding">
