@@ -16,7 +16,7 @@ export default class Homepage extends Component {
 
   render() {
     return (
-        <div>
+        <div className="container">
           <h1 className="welcome card" id="WelcomeMessage">Hello,{this.state.name}</h1>
           <Transaction walletNumber={1}/>
         </div>

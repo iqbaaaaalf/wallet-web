@@ -104,17 +104,16 @@ export default class Transfer extends Component {
             <div className="card border-primary mb-3 align-content-lg-left">
               <div className="card-header">Transfer</div>
               {this.state.message !== '' ? <span>{this.state.message}</span> : null}
-              <div className="row">
-                <div className="col">
+              <div className="row form-padding">
+                <div className="col text-left space-left-title">
                   <label htmlFor="from">From:</label>
                 </div>
-                <div className="col-8">
+                <div className="col-8 text-left space-left-title">
                   <span className="from">Budi</span>
-                  <button onClick={this._handleAddPayee} />
                 </div>
               </div>
-              <div className="row">
-                <div className="col">
+              <div className="row form-padding">
+                <div className="col text-left space-left-title">
                   <label htmlFor="To">To:</label>
                 </div>
                 <div className="col-8">
@@ -122,26 +121,33 @@ export default class Transfer extends Component {
                              callbackFunction={this._callback.bind(this)} />
                 </div>
               </div>
-              <div className="row">
-                <div className="col">
+              <div className="row form-padding">
+                <div className="col text-left space-left-title">
                   <label htmlFor="amount">Amount: </label>
                 </div>
                 <div className="col-8">
-                  <input type="text" className="amount" onChange={this._handleAmount} />
+                  <input type="text" className="amount form-control"
+                         onChange={this._handleAmount} />
                 </div>
               </div>
-              <div className="row">
-                <div className="col">
+              <div className="row form-padding">
+                <div className="col text-left space-left-title">
                   <label htmlFor="description">Description :</label>
                 </div>
                 <div className="col-8">
-                  <textarea className="description" onChange={this._handleDescription} />
+                  <textarea className="description form-control"
+                            onChange={this._handleDescription} />
                 </div>
               </div>
-              <div className="row">
-                <div className="col">
+              <div className="row form-padding">
+                <div className="col-5 text-right">
                   <button type="submit" className="submit btn btn-secondary"
                           onClick={this._handleSubmit}> Send
+                  </button>
+                </div>
+                <div className="col-md-3">
+                  <button className={'submit-payee btn btn-secondary'}
+                          onClick={this._handleAddPayee}>Add Payee
                   </button>
                 </div>
               </div>

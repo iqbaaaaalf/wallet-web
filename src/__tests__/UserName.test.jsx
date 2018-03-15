@@ -18,7 +18,7 @@ describe('Dashboard', () => {
       };
       wrapper.setState(data);
       const username = wrapper.find('#username');
-      expect(username.text()).toBe(`Hello, iqbal`);
+      expect(username.text()).toBe(`Hello,iqbal`);
     });
   });
 });
