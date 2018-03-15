@@ -15,4 +15,10 @@ describe('Dashboard', () => {
       expect(wrapper.contains(<UserBalance/>)).toEqual(true);
     });
   });
+  describe('handle submit', () => {
+    it('should update dashboard', () => {
+      const wrapper = shallow(<Dashboard />);
+      wrapper.setState({});
+    });
+  });
 });
