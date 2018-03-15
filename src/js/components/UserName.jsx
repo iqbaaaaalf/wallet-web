@@ -12,7 +12,7 @@ export default class UserName extends Component {
   render() {
     return (
         <div id={'username'} className="Name">
-          Hello, {this.state.name}
+          <h1 className="card">Hello,{this.state.name}</h1>
         </div>
     );
   }
