@@ -64,7 +64,7 @@ export default class AddPayee extends Component {
                 <p>{message}</p>
                 <input type="text" id="username" className={'form-control'} onChange={this._onChangeText}
                        value={username} />
-                <button type="submit" id="searchPayee" className="submit btn-primary"
+                <button type="submit" id="searchPayee" className="submit btn btn-primary"
                         onClick={this._onClickButtonSearch}> Search
                 </button>
                 {payee !== '' ? <div>
