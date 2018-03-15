@@ -91,16 +91,18 @@ export default class Transfer extends Component {
   _getPayee() {
     axios.get(`http://localhost:3000/users/${store.data.userId}/payees`).then((response) => {
       const listPayee = response.data;
+      let to = {};
       axios.get(`http://localhost:3000/users/${listPayee[ 0 ].id}/wallets`).then((response) => {
-            this.setState({
-              payeeList: listPayee,
-              to: {
-                walletId: response.data.id,
-              },
-            });
+            to = {
+              walletId: response.data.id,
+            };
           },
       ).catch((e) => {
         console.log(e);
+      });
+      this.setState({
+        payeeList: listPayee,
+        to: to,
       });
     }).catch((e) => {
       this.setState({
@@ -124,12 +126,12 @@ export default class Transfer extends Component {
             <div className="card border-primary mb-3 align-content-lg-left">
               <div className="card-header">
                 <div className={'row'}>
-                <div className="col-10 transfer">Transfer</div>
-                <div className="col add-payee justify-content-end">
-                  <button className={'submit-add-payee btn btn-secondary'}
-                        onClick={this._handleAddPayee}><i className="fas fa-user-plus"></i>
-                 </button>
-                </div>
+                  <div className="col-10 transfer">Transfer</div>
+                  <div className="col add-payee justify-content-end">
+                    <button className={'submit-add-payee btn btn-secondary'}
+                            onClick={this._handleAddPayee}><i className="fas fa-user-plus"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
               {this.state.message !== '' ? <span>{this.state.message}</span> : null}

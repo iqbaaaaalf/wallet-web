@@ -24,21 +24,30 @@ export default class AddPayee extends Component {
   }
 
   _onClickButtonSearch() {
+    let valid = true;
     this.setState({
       payee: '',
       message: '',
     });
-    const { username } = this.state;
-    axios.get(`http://localhost:3000/users?username=${username}`).then((response) => {
+    if (this.state.username === '') {
+      valid = false;
       this.setState({
-        payee: response.data,
-        usernamePayee: response.data.username
+        message: 'Username Payee required',
       });
-    }).catch((e) => {
-      this.setState({
-        message: e.response.data.message,
+    }
+    if (valid) {
+      const { username } = this.state;
+      axios.get(`http://localhost:3000/users?username=${username}`).then((response) => {
+        this.setState({
+          payee: response.data,
+          usernamePayee: response.data.username,
+        });
+      }).catch((e) => {
+        this.setState({
+          message: e.response.data.message,
+        });
       });
-    });
+    }
   }
 
   _onClickButtonAdd() {
@@ -59,12 +68,13 @@ export default class AddPayee extends Component {
     const { payee, username, message } = this.state;
     return (
         <div className={'container'}>
-        <section>
+          <section>
             <div className="card">
               <div className="card-header">Add Payee</div>
               <div className="card-body text-primary">
                 <p>{message}</p>
-                <input type="text" id="username" className={'form-control'} onChange={this._onChangeText}
+                <input type="text" id="username" className={'form-control'}
+                       onChange={this._onChangeText}
                        value={username} />
                 <button type="submit" id="searchPayee" className="submit btn btn-primary"
                         onClick={this._onClickButtonSearch}> Search
@@ -78,7 +88,7 @@ export default class AddPayee extends Component {
                 }
               </div>
             </div>
-        </section>
+          </section>
         </div>
     );
   }

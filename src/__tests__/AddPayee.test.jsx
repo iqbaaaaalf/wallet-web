@@ -68,6 +68,7 @@ describe('AddPayee', () => {
     it('should reset message state when button search clicked', () => {
       const wrapper = mount(<AddPayee />);
       wrapper.setState({
+        username: 'Test',
         message: 'User Not Found',
       });
       const searchButton = wrapper.find('#searchPayee');
@@ -99,6 +100,14 @@ describe('AddPayee', () => {
         });
       });
     });
+
+    it('should change message state to "Username Payee required" when username is empty and button search clicked"',
+        () => {
+          const wrapper = mount(<AddPayee />);
+          const button = wrapper.find('#searchPayee');
+          button.simulate('click');
+          expect(wrapper.state('message')).toEqual('Username Payee required');
+        });
 
     it('should change message state when specified username not found', (done) => {
       const wrapper = mount(<AddPayee />);
