@@ -32,7 +32,7 @@ class Navigation extends Component {
                  href="#v-pills-home"
                  aria-controls="v-pills-home"
                  aria-selected="true"
-              >Home
+              > <i className="fas fa-home"></i> Home
               </a>
             </Link>
             <Link to={'/dashboard'}>
@@ -44,7 +44,7 @@ class Navigation extends Component {
                  href="#v-pills-dashboard"
                  aria-controls="v-pills-dashboard"
                  aria-selected="false"
-              >Dashboard
+              ><i className="fas fa-columns"></i>Dashboard
               </a>
             </Link>
             <Link to={'/transfer'}>
@@ -55,7 +55,7 @@ class Navigation extends Component {
                  href="#v-pills-transfer"
                  aria-controls="v-pills-transfer"
                  aria-selected="false"
-              >Transfer
+              ><i className="fas fa-exchange-alt"></i>Transfer
               </a>
             </Link>
             <Link to={'/topUp'}>
@@ -66,7 +66,7 @@ class Navigation extends Component {
                  href="#v-pills-transaction"
                  aria-controls="v-pills-transaction"
                  aria-selected="false"
-              >Top Up
+              ><i className="fas fa-arrow-alt-circle-up"></i>Top Up
               </a>
             </Link>
             <a className={'nav-link'}
@@ -75,7 +75,7 @@ class Navigation extends Component {
                aria-controls="v-pills-transaction"
                aria-selected="false"
                onClick={this._doLogout.bind(this)}
-            >Logout
+            ><i className="fas fa-sign-out-alt"></i>Logout
             </a>
           </div>
         </div>

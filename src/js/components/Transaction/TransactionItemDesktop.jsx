@@ -11,17 +11,19 @@ export default class TransactionItemDesktop extends Component {
         <tr key={index}>
           <td>{moment(transaction.date).format('dddd, DD/MM/YYYY, h:mm:ss a')}</td>
           <td>
-            {transaction.FromWallet === null ? '' : (transaction.FromWallet.id !==
+            {transaction.FromWallet === null ? 'TOPUP' : (transaction.FromWallet.id !==
             this.props.transactionWalletId
                 ? transaction.FromWallet.User.name
                 : '')}
-            {transaction.ToWallet === null ? '' : (transaction.ToWallet.id !==
+            {transaction.ToWallet === null ? 'WITHDRAW' : (transaction.ToWallet.id !==
             this.props.transactionWalletId
                 ? transaction.ToWallet.User.name
                 : '')}
           </td>
-          <td>{transaction.FromWallet === null ? 'Debit' : (transaction.FromWallet.id ===
-          this.props.transactionWalletId ? 'Credit' : '')}</td>
+          <td>
+            {transaction.FromWallet !== null ? (transaction.FromWallet.id === this.props.transactionWalletId ? 'Debit' : '') : ''}
+            {transaction.ToWallet !== null ? (transaction.ToWallet.id === this.props.transactionWalletId ? 'Credit' : '') : ''}
+          </td>
           <td>{transaction.description}</td>
           <td>{transaction.amount}</td>
         </tr>,

@@ -9,7 +9,7 @@ describe('PayeeList', () => {
       const payee = [ { name: 'dona' } ];
       const wrapper = mount(<Payeelist payeelisting={payee} />);
       const optionrow = wrapper.find('select').at(0);
-      let nameColoumn = optionrow.find('option').at(1).text();
+      let nameColoumn = optionrow.find('option').at(0).text();
       const actualOutput = `${nameColoumn}`;
       const expectedOutput = 'dona';
       expect(actualOutput).toBe(expectedOutput);
@@ -18,7 +18,7 @@ describe('PayeeList', () => {
       const payee = [ { name: 'doni' } ];
       const wrapper = mount(<Payeelist payeelisting={payee} />);
       const optionrow = wrapper.find('select').at(0);
-      let nameColoumn = optionrow.find('option').at(1).text();
+      let nameColoumn = optionrow.find('option').at(0).text();
       const actualOutput = `${nameColoumn}`;
       const expectedOutput = 'doni';
       expect(actualOutput).toBe(expectedOutput);

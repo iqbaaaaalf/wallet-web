@@ -29,12 +29,14 @@ export default class Transfer extends Component {
   _handleAmount(event) {
     this.setState({
       amount: event.target.value,
+      message: '',
     });
   }
 
   _handleDescription(event) {
     this.setState({
       description: event.target.value,
+      message: '',
     });
   }
 
@@ -43,6 +45,7 @@ export default class Transfer extends Component {
       to: {
         walletId: wallet,
       },
+      message: '',
     });
   }
 
@@ -53,14 +56,14 @@ export default class Transfer extends Component {
     if (amount === '') {
       valid = false;
       this.setState({
-        errorAmount: 'Amount is require',
+        message: 'Amount is require',
       });
     }
 
     if (amount !== '' && Number(amount) <= 0) {
       valid = false;
       this.setState({
-        errorAmount: 'Invalid amount',
+        message: 'Invalid amount',
       });
     }
 
@@ -74,7 +77,6 @@ export default class Transfer extends Component {
       }).then((response) => {
         this.setState({
           message: 'Success',
-          to: '',
           amount: '',
           description: '',
         });
@@ -87,11 +89,21 @@ export default class Transfer extends Component {
   }
 
   _getPayee() {
-    axios.get(`http://localhost:3000/users/${store.data.userId}/payees`).then((response) => {
+    axios.get(`http://localhost:3000/users/${store.data.userId}/payees`).then((payeesResponse) => {
+      const payeesList = payeesResponse.data;
+      return Promise.all([
+        payeesList,
+        axios.get(`http://localhost:3000/users/${payeesList[ 0 ].id}/wallets`),
+      ]);
+    }).then(([ payeesList, walletsResponse ]) => {
+      const to = {
+        walletId: walletsResponse.data.id,
+      };
       this.setState({
-        payeeList: response.data,
+        payeeList: payeesList,
+        to: to,
       });
-    }).catch((e) => {
+    }).catch((err) => {
       this.setState({
         payeeList: [],
       });
@@ -111,7 +123,16 @@ export default class Transfer extends Component {
         <div className="container">
           <form>
             <div className="card border-primary mb-3 align-content-lg-left">
-              <div className="card-header">Transfer</div>
+              <div className="card-header">
+                <div className={'row'}>
+                  <div className="col-10 transfer">Transfer</div>
+                  <div className="col add-payee justify-content-end">
+                    <button className={'submit-add-payee btn btn-secondary'}
+                            onClick={this._handleAddPayee}><i className="fas fa-user-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
               {this.state.message !== '' ? <span>{this.state.message}</span> : null}
               <div className="row form-padding">
                 <div className="col text-left space-left-title">
@@ -126,8 +147,11 @@ export default class Transfer extends Component {
                   <label htmlFor="To">To:</label>
                 </div>
                 <div className="col-8">
-                  <Payeelist payeelisting={this.state.payeeList}
-                             callbackFunction={this._callback.bind(this)}/>
+                  {this.state.payeeList.length === 0 ?
+                      <span>You don't have payee. Please add Payee first.</span>
+                      : <Payeelist payeelisting={this.state.payeeList}
+                                   callbackFunction={this._callback.bind(this)} />
+                  }
                 </div>
               </div>
               <div className="row form-padding">
@@ -136,7 +160,7 @@ export default class Transfer extends Component {
                 </div>
                 <div className="col-8">
                   <input type="number" min="0" className="amount form-control "
-                         onChange={this._handleAmount} value={this.state.amount}/>
+                         onChange={this._handleAmount} value={this.state.amount} />
                 </div>
               </div>
               <div className="row form-padding">
@@ -145,18 +169,13 @@ export default class Transfer extends Component {
                 </div>
                 <div className="col-8">
                   <textarea className="description form-control"
-                            onChange={this._handleDescription} value={this.state.description}/>
+                            onChange={this._handleDescription} value={this.state.description} />
                 </div>
               </div>
               <div className="row form-padding">
-                <div className="col-5 text-right">
-                  <button type="submit" className="submit btn btn-secondary"
+                <div className="col-6 text-right">
+                  <button type="submit" className="submit-send btn btn-secondary"
                           onClick={this._handleSubmit}> Send
-                  </button>
-                </div>
-                <div className="col-md-3">
-                  <button className={'submit-payee btn btn-secondary'}
-                          onClick={this._handleAddPayee}>Add Payee
                   </button>
                 </div>
               </div>
