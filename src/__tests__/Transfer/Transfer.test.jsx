@@ -164,12 +164,25 @@ describe('Transfer', () => {
         amount: '',
         description: 'pay go food',
       };
-      const mockFunction = jest.fn();
-      const wrapper = mount(<Transfer onSubmit={mockFunction} />);
+      const wrapper = mount(<Transfer />);
       const submit = wrapper.find('.submit');
       wrapper.setState(mockData);
       submit.simulate('click');
       expect(wrapper.state('errorAmount')).toEqual('Amount is require');
+    });
+
+    it('should change errorAmount state when amount is 0', () => {
+      const mockData = {
+        from: 'Budi',
+        to: 'Doni',
+        amount: '0',
+        description: 'pay go food',
+      };
+      const wrapper = mount(<Transfer />);
+      const submit = wrapper.find('.submit');
+      wrapper.setState(mockData);
+      submit.simulate('click');
+      expect(wrapper.state('errorAmount')).toEqual('Invalid amount');
     });
 
     it('should call errorDescription if Description is empty', () => {

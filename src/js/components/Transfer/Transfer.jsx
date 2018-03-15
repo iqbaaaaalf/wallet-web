@@ -66,7 +66,7 @@ export default class Transfer extends Component {
     if (amount !== '' && Number(amount) <= 0) {
       valid = false;
       this.setState({
-        errorDescription: 'Description is require',
+        errorAmount: 'Invalid amount',
       });
     }
 
