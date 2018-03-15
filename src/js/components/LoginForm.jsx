@@ -84,11 +84,14 @@ export default class LoginForm extends Component {
   render() {
     const { username, password } = this.state;
     return (
-        <section>
+        <section className="section-form">
+          <div className="container justify-content-center">
           <div className="jumbotron jumbotron-fluid">
             <div className="container">
               <form>
-                <div className="avatar"></div>
+                <div className="avatar">
+                  <i className="fas fa-user fa-5x"></i>
+                </div>
                 <div className="row justify-content-md-center">
                   <div className="form-group">
                     <label htmlFor="ErrorUsername">{this.state.errorUsername}</label>
@@ -112,6 +115,7 @@ export default class LoginForm extends Component {
                 </div>
               </form>
             </div>
+          </div>
           </div>
         </section>
     );

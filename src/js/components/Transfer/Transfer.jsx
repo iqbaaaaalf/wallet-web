@@ -122,7 +122,16 @@ export default class Transfer extends Component {
         <div className="container">
           <form>
             <div className="card border-primary mb-3 align-content-lg-left">
-              <div className="card-header">Transfer</div>
+              <div className="card-header">
+                <div className={'row'}>
+                <div className="col-10 transfer">Transfer</div>
+                <div className="col add-payee justify-content-end">
+                  <button className={'submit-add-payee btn btn-secondary'}
+                        onClick={this._handleAddPayee}><i className="fas fa-user-plus"></i>
+                 </button>
+                </div>
+                </div>
+              </div>
               {this.state.message !== '' ? <span>{this.state.message}</span> : null}
               <div className="row form-padding">
                 <div className="col text-left space-left-title">
@@ -163,14 +172,9 @@ export default class Transfer extends Component {
                 </div>
               </div>
               <div className="row form-padding">
-                <div className="col-5 text-right">
-                  <button type="submit" className="submit btn btn-secondary"
+                <div className="col-6 text-right">
+                  <button type="submit" className="submit-send btn btn-secondary"
                           onClick={this._handleSubmit}> Send
-                  </button>
-                </div>
-                <div className="col-md-3">
-                  <button className={'submit-payee btn btn-secondary'}
-                          onClick={this._handleAddPayee}>Add Payee
                   </button>
                 </div>
               </div>

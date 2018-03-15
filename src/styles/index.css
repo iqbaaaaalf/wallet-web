@@ -7,6 +7,7 @@ body {
 .footer{
   background-color: #f58220;
   height: 50px;
+  margin-top: 10px;
 }
 
 .footer p {
@@ -26,6 +27,8 @@ img{
 }
 .card-header{
   background-color: #f58220;
+  height: 50px;
+  padding-top: 10px;
 }
 .card{
   background-color: #fef2e8;
@@ -62,4 +65,27 @@ h1{
 .submit-payee{
   margin-bottom: 10px;
   background-color: #f58220;
+}
+.submit-add-payee{
+  padding-bottom: -40px;
+  background-color: #f3a564;
+  margin-bottom: 10px;
+}
+.submit-send{
+  margin-bottom: 10px;
+  background-color: #f58220;
+  margin-right: 85px;
+}
+.section-form{
+  padding-right: 350px;
+}
+.avatar{
+  background-color:#f58220 ;
+}
+
+.transfer{
+  padding-left: 200px;
+}
+.add-payee{
+  margin-left: 50px;
 }
