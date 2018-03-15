@@ -9,6 +9,7 @@ export default class AddPayee extends Component {
       payee: '',
       message: '',
       username: '',
+      usernamePayee: '',
     };
     this._onChangeText = this._onChangeText.bind(this);
     this._onClickButtonSearch = this._onClickButtonSearch.bind(this);
@@ -29,9 +30,9 @@ export default class AddPayee extends Component {
     });
     const { username } = this.state;
     axios.get(`http://localhost:3000/users?username=${username}`).then((response) => {
-      store.update({usernamePayee: response.data.username});
       this.setState({
         payee: response.data,
+        usernamePayee: response.data.username
       });
     }).catch((e) => {
       this.setState({
@@ -42,7 +43,7 @@ export default class AddPayee extends Component {
 
   _onClickButtonAdd() {
     axios.post(`http://localhost:3000/users/${store.data.userId}/payees`, {
-      username: store.data.usernamePayee,
+      username: this.state.usernamePayee,
     }).then((response) => {
       this.setState({
         message: 'Success',
