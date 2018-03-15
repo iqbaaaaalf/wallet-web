@@ -15,8 +15,8 @@ export default class Dashboard extends Component {
       filterColumn: null,
       filterMode: null,
       filterValue: null,
-      sortColumn: null,
-      sortValue: null,
+      sortColumn: 'date',
+      sortValue: 'desc',
       query: '',
     };
   }
