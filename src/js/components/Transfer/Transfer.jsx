@@ -89,22 +89,21 @@ export default class Transfer extends Component {
   }
 
   _getPayee() {
-    axios.get(`http://localhost:3000/users/${store.data.userId}/payees`).then((response) => {
-      const listPayee = response.data;
-      let to = {};
-      axios.get(`http://localhost:3000/users/${listPayee[ 0 ].id}/wallets`).then((response) => {
-            to = {
-              walletId: response.data.id,
-            };
-          },
-      ).catch((e) => {
-        console.log(e);
-      });
+    axios.get(`http://localhost:3000/users/${store.data.userId}/payees`).then((payeesResponse) => {
+      const payeesList = payeesResponse.data;
+      return Promise.all([
+        payeesList,
+        axios.get(`http://localhost:3000/users/${payeesList[ 0 ].id}/wallets`),
+      ]);
+    }).then(([ payeesList, walletsResponse ]) => {
+      const to = {
+        walletId: walletsResponse.data.id,
+      };
       this.setState({
-        payeeList: listPayee,
+        payeeList: payeesList,
         to: to,
       });
-    }).catch((e) => {
+    }).catch((err) => {
       this.setState({
         payeeList: [],
       });
