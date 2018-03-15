@@ -6,6 +6,7 @@ import Sort from './Sort';
 import Transaction from './Transaction/Transaction';
 import UserBalance from './UserBalance';
 import UserName from './UserName';
+import store from 'simple-global-store';
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -57,7 +58,8 @@ export default class Dashboard extends Component {
               <FilterAmount onClick={this.onUpdateFilterValue.bind(this)} />
             </div>
           </div>
-          <Transaction walletNumber={1}
+          <Transaction walletNumber={store.data.walletId}
+                       limitFetching={10}
                        transactionFilterColumn={this.state.filterColumn}
                        transactionFilterMode={this.state.filterMode}
                        transactionFilterValue={this.state.filterValue}

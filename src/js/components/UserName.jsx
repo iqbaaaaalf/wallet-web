@@ -1,18 +1,11 @@
-import axios from 'axios';
 import React, { Component } from 'react';
+import store from 'simple-global-store';
 
 export default class UserName extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: 'Iqbal',
-    };
-  }
-
   render() {
     return (
         <div id={'username'} className="Name">
-          <h1 className="card">Hello,{this.state.name}</h1>
+          <h1 className="card">Hello, {store.data.name}</h1>
         </div>
     );
   }
