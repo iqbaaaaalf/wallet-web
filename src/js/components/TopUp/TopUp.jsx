@@ -42,6 +42,7 @@ export default class TopUp extends Component {
       }).then((response) => {
         this.setState({
           message: 'Success',
+          amount: '',
         });
       }).catch((e) => {
         this.setState({
