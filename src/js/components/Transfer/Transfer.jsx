@@ -80,6 +80,9 @@ export default class Transfer extends Component {
       }).then((response) => {
         this.setState({
           message: 'Success',
+          to: '',
+          amount: '',
+          description: '',
         });
       }).catch((e) => {
         this.setState({
@@ -138,8 +141,8 @@ export default class Transfer extends Component {
                   <label htmlFor="amount">Amount: </label>
                 </div>
                 <div className="col-8">
-                  <input type="number" className="amount form-control "
-                         onChange={this._handleAmount}/>
+                  <input type="number" min="0" className="amount form-control "
+                         onChange={this._handleAmount} value={this.state.amount}/>
                 </div>
               </div>
               <div className="row form-padding">
@@ -148,7 +151,7 @@ export default class Transfer extends Component {
                 </div>
                 <div className="col-8">
                   <textarea className="description form-control"
-                            onChange={this._handleDescription}/>
+                            onChange={this._handleDescription} value={this.state.description}/>
                 </div>
               </div>
               <div className="row form-padding">
