@@ -70,7 +70,7 @@ export default class AddPayee extends Component {
                 </button>
                 {payee !== '' ? <div>
                   <p className="payee">{payee.name}</p>
-                  <button type="submit" id="addPayee" className="payeeExist submit"
+                  <button type="submit" id="addPayee" className="btn payeeExist submit"
                           onClick={this._onClickButtonAdd}>Add
                   </button>
                 </div> : null

@@ -46,10 +46,10 @@ export default class FilterAmount extends React.Component {
               />
             </div>
             <div className="col btn-group btn-group-toggle" role="group" aria-label="Basic example">
-              <button type="button" className="button-amount--lesser btn btn-secondary"
+              <button type="button" className="submit-payee button-amount--lesser btn btn-secondary"
                       onClick={this._onSubmitLesser.bind(this)}>Lesser
               </button>
-              <button type="button" className="button-amount--greater btn btn-secondary"
+              <button type="button" className="submit-payee button-amount--greater btn btn-secondary"
                       onClick={this._onSubmitGreater.bind(this)}>Greater
               </button>
             </div>
