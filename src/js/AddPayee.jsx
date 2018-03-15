@@ -29,6 +29,7 @@ export default class AddPayee extends Component {
     });
     const { username } = this.state;
     axios.get(`http://localhost:3000/users?username=${username}`).then((response) => {
+      store.update({usernamePayee: response.data.username});
       this.setState({
         payee: response.data,
       });
@@ -40,9 +41,8 @@ export default class AddPayee extends Component {
   }
 
   _onClickButtonAdd() {
-    const { username } = this.state;
     axios.post(`http://localhost:3000/users/${store.data.userId}/payees`, {
-      username: username,
+      username: store.data.usernamePayee,
     }).then((response) => {
       this.setState({
         message: 'Success',
