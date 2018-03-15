@@ -36,7 +36,7 @@ export default class FilterAmount extends React.Component {
     const { amount } = this.state;
 
     return (
-        <div className="container">
+        <div>
           <div className="row">
             <div className="col">
               <input className="filter-query--amount form-control"
