@@ -59,7 +59,6 @@ export default class Dashboard extends Component {
             </div>
           </div>
           <Transaction walletNumber={store.data.walletId}
-                       limitFetching={10}
                        transactionFilterColumn={this.state.filterColumn}
                        transactionFilterMode={this.state.filterMode}
                        transactionFilterValue={this.state.filterValue}

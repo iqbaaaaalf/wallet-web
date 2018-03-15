@@ -74,6 +74,7 @@ export default class Transfer extends Component {
       axios.post(`http://localhost:3000/wallets/${from.walletId}/transactions`, {
         date: moment().format(),
         amount: amount,
+        description: description,
         toWalletID: to.walletId,
         fromWalletID: from.walletId,
       }).then((response) => {
@@ -129,7 +130,7 @@ export default class Transfer extends Component {
                 </div>
                 <div className="col-8">
                   <Payeelist payeelisting={this.state.payeeList}
-                             callbackFunction={this._callback.bind(this)} />
+                             callbackFunction={this._callback.bind(this)}/>
                 </div>
               </div>
               <div className="row form-padding">
@@ -138,7 +139,7 @@ export default class Transfer extends Component {
                 </div>
                 <div className="col-8">
                   <input type="number" className="amount form-control "
-                         onChange={this._handleAmount} />
+                         onChange={this._handleAmount}/>
                 </div>
               </div>
               <div className="row form-padding">
@@ -147,7 +148,7 @@ export default class Transfer extends Component {
                 </div>
                 <div className="col-8">
                   <textarea className="description form-control"
-                            onChange={this._handleDescription} />
+                            onChange={this._handleDescription}/>
                 </div>
               </div>
               <div className="row form-padding">
