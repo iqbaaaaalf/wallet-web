@@ -1,7 +1,7 @@
 import axios from 'axios/index';
 import moment from 'moment';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import store from 'simple-global-store';
 import Payeelist from './Payeelist';
 
 export default class Transfer extends Component {
@@ -9,7 +9,7 @@ export default class Transfer extends Component {
     super(props);
     this.state = {
       from: {
-        walletId: 1,
+        walletId: store.data.walletId,
       },
       to: '',
       amount: '',
@@ -18,6 +18,7 @@ export default class Transfer extends Component {
       errorDescription: '',
       payeeList: [],
       message: '',
+      name: store.data.name,
     };
     this._handleAmount = this._handleAmount.bind(this);
     this._handleDescription = this._handleDescription.bind(this);
@@ -48,18 +49,28 @@ export default class Transfer extends Component {
   _handleSubmit(event) {
     event.preventDefault();
     const { from, to, amount, description } = this.state;
-    if (amount === '') {
-      this.setState({
-        errorAmount: 'Amount is require',
-      });
-    }
+    let valid = true;
     if (description === '') {
+      valid = false;
       this.setState({
         errorDescription: 'Description is require',
       });
     }
+    if (amount === '') {
+      valid = false;
+      this.setState({
+        errorAmount: 'Amount is require',
+      });
+    }
 
-    if (to !== '') {
+    if (amount !== '' && Number(amount) <= 0) {
+      valid = false;
+      this.setState({
+        errorAmount: 'Invalid amount',
+      });
+    }
+
+    if (to !== '' && valid) {
       axios.post(`http://localhost:3000/wallets/${from.walletId}/transactions`, {
         date: moment().format(),
         amount: amount,
@@ -78,7 +89,7 @@ export default class Transfer extends Component {
   }
 
   _getPayee() {
-    axios.get('http://localhost:3000/users/1/payees').then((response) => {
+    axios.get(`http://localhost:3000/users/${store.data.userId}/payees`).then((response) => {
       this.setState({
         payeeList: response.data,
       });
@@ -109,7 +120,7 @@ export default class Transfer extends Component {
                   <label htmlFor="from">From:</label>
                 </div>
                 <div className="col-8 text-left space-left-title">
-                  <span className="from">Budi</span>
+                  <span className="from">{this.state.name}</span>
                 </div>
               </div>
               <div className="row form-padding">
@@ -126,7 +137,7 @@ export default class Transfer extends Component {
                   <label htmlFor="amount">Amount: </label>
                 </div>
                 <div className="col-8">
-                  <input type="text" className="amount form-control"
+                  <input type="number" className="amount form-control "
                          onChange={this._handleAmount} />
                 </div>
               </div>

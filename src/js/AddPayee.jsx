@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import store from 'simple-global-store';
 
 export default class AddPayee extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ export default class AddPayee extends Component {
 
   _onClickButtonAdd() {
     const { username } = this.state;
-    axios.post('http://localhost:3000/users/1362/payees', {
+    axios.post(`http://localhost:3000/users/${store.data.userId}/payees`, {
       username: username,
     }).then((response) => {
       this.setState({
