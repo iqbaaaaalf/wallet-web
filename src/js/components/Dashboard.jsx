@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import Filter from './Filter/Filter';
 import FilterAmount from './Filter/FilterAmount';
 import FilterQuery from './Filter/FilterQuery';
+import Sort from './Sort';
 import Transaction from './Transaction/Transaction';
 import UserBalance from './UserBalance';
 import UserName from './UserName';
+import store from 'simple-global-store';
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -40,18 +42,23 @@ export default class Dashboard extends Component {
     return (
         <div className={'container'}>
           <div className={'card'}>
-          <span className={'dashboard-user__title'}>
+          <span className={'dashboard-user__title '} id="WelcomeMessage">
             <UserName/>
           </span>
-            <section className={'dashboard-user__balance'}>
-              <label>Your Balance</label>
+            <section>
+              <label className="balance">Your Balance</label>
               <UserBalance/>
             </section>
           </div>
-          <FilterQuery onChange={this.onSubmitFilterDesc.bind(this)}  value={this.state.query}/>
-          <FilterAmount onClick={this.onUpdateFilterValue.bind(this)} />
-          <Transaction walletNumber={1}
-                       limitFetching={5}
+          <div className={'row filter-wrap'}>
+            <div className={'col'}>
+              <FilterQuery onChange={this.onSubmitFilterDesc.bind(this)} value={this.state.query} />
+            </div>
+            <div className={'col'}>
+              <FilterAmount onClick={this.onUpdateFilterValue.bind(this)} />
+            </div>
+          </div>
+          <Transaction walletNumber={store.data.walletId}
                        transactionFilterColumn={this.state.filterColumn}
                        transactionFilterMode={this.state.filterMode}
                        transactionFilterValue={this.state.filterValue}

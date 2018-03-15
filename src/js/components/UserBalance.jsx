@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import store from 'simple-global-store';
 
 export default class UserBalance extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ export default class UserBalance extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3000/users/1/wallets').then((response) => {
+    axios.get(`http://localhost:3000/users/${store.data.userId}/wallets`).then((response) => {
       this.setState({
         balance: response.data.balance,
       });

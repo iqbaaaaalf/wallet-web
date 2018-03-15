@@ -19,6 +19,11 @@ export default class Transaction extends Component {
       url += `&size=${this.props.limitFetching}`;
     }
 
+    if(this.props.transactionSortColumn !== null){
+      url+= `&orderBy=${this.props.transactionSortColumn}`;
+      url+= `&order=${this.props.transactionSortValue}`;
+    }
+
     axios.get(url).then((response) => {
       this.setState({
         transactionCollection: response.data,
@@ -47,7 +52,6 @@ export default class Transaction extends Component {
     }
 
     axios.get(url).then((response) => {
-      console.log(response.data);
       this.setState({
         transactionCollection: response.data,
       });

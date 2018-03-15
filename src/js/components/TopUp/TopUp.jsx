@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import store from 'simple-global-store';
 
 export default class TopUp extends Component {
   constructor(props) {
@@ -7,7 +8,6 @@ export default class TopUp extends Component {
     this.state = {
       amount: '',
       message: '',
-      userId: '1',
     };
     this._handleAmountTopUp = this._handleAmountTopUp.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
@@ -20,7 +20,7 @@ export default class TopUp extends Component {
   }
 
   _handleSubmit() {
-    const { amount, userId } = this.state;
+    const { amount } = this.state;
     let valid = true;
     if (amount === '') {
       valid = false;
@@ -37,11 +37,12 @@ export default class TopUp extends Component {
     }
 
     if (valid) {
-      axios.post(`http://localhost:3000/users/${userId}/wallets`, {
+      axios.post(`http://localhost:3000/users/${store.data.userId}/wallets`, {
         amount: Number(amount),
       }).then((response) => {
         this.setState({
           message: 'Success',
+          amount: '',
         });
       }).catch((e) => {
         this.setState({
@@ -65,12 +66,12 @@ export default class TopUp extends Component {
               </div>
               <div className="row">
                 <div className="col">
-                  <input type="number" id="amount" onChange={this._handleAmountTopUp}
+                  <input type="number" id="amount" className={'form-control'} onChange={this._handleAmountTopUp}
                          placeholder="ex:50000"
                          value={amount} />
                 </div>
               </div>
-              <button type="submit" id="submit" className="submit" onClick={this._handleSubmit}>Top
+              <button type="submit" id="submit" className="submit btn btn-secondary" onClick={this._handleSubmit}>Top
                 Up
               </button>
             </div>

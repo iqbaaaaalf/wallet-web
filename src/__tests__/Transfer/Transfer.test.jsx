@@ -14,7 +14,7 @@ describe('Transfer', () => {
 
   describe('componentDidMount', () => {
     it('should change payeeList state after rendered', (done) => {
-      const wrapper = shallow(<Transfer />);
+      const wrapper = shallow(<Transfer/>);
       moxios.wait(() => {
         let request = moxios.requests.mostRecent();
         request.respondWith({
@@ -29,7 +29,7 @@ describe('Transfer', () => {
 
     it('should change payeeList state to empty array when error happen while get payee list',
         (done) => {
-          const wrapper = shallow(<Transfer />);
+          const wrapper = shallow(<Transfer/>);
           moxios.wait(() => {
             let request = moxios.requests.mostRecent();
             request.respondWith({
@@ -44,11 +44,10 @@ describe('Transfer', () => {
 
   describe('handleFrom', () => {
     it('should return Name of owner WalletId', () => {
-      const wrapper = shallow(<Transfer />);
-      const data = {
+      const wrapper = mount(<Transfer/>);
+      wrapper.setState({
         name: 'Budi',
-      };
-      wrapper.state(data);
+      });
       const from = wrapper.find('span');
       expect(from.text()).toEqual('Budi');
     });
@@ -56,7 +55,7 @@ describe('Transfer', () => {
 
   describe('handleAmount', () => {
     it('should return amount of transfer', () => {
-      const wrapper = shallow(<Transfer />);
+      const wrapper = shallow(<Transfer/>);
       const inputAmount = wrapper.find('.amount');
       inputAmount.simulate('change', {
         target: {
@@ -69,7 +68,7 @@ describe('Transfer', () => {
 
   describe('handleDescription', () => {
     it('should return text on textarea as description', () => {
-      const wrapper = shallow(<Transfer />);
+      const wrapper = shallow(<Transfer/>);
       const inputDescription = wrapper.find('.description');
       inputDescription.simulate('change', {
         target: {
@@ -82,7 +81,7 @@ describe('Transfer', () => {
 
   describe('handle changing PayeeList', () => {
     it('should change "to" state when payeeList changing', (done) => {
-      const wrapper = mount(<Transfer />);
+      const wrapper = mount(<Transfer/>);
       const payeeListWrapper = wrapper.find(Payeelist);
       const comboboxElement = payeeListWrapper.find('#comboPayee');
       comboboxElement.simulate('change', {
@@ -107,10 +106,11 @@ describe('Transfer', () => {
   });
 
   describe('handleSubmit', () => {
-    it('should change message state to Success', () => {
-      const wrapper = mount(<Transfer />);
+    it('should change message state to Success', (done) => {
+      const wrapper = mount(<Transfer/>);
       wrapper.setState({
         amount: 1000,
+        description: 'transfer',
         to: {
           walletId: 2,
         },
@@ -131,10 +131,11 @@ describe('Transfer', () => {
       });
     });
 
-    it('should change message state to Insufficient Amount when balance not enough', () => {
-      const wrapper = mount(<Transfer />);
+    it('should change message state to Insufficient Amount when balance not enough', (done) => {
+      const wrapper = mount(<Transfer/>);
       wrapper.setState({
         amount: 30000,
+        description: 'transfer',
         to: {
           walletId: 2,
         },
@@ -165,12 +166,25 @@ describe('Transfer', () => {
         amount: '',
         description: 'pay go food',
       };
-      const mockFunction = jest.fn();
-      const wrapper = mount(<Transfer onSubmit={mockFunction} />);
+      const wrapper = mount(<Transfer/>);
       const submit = wrapper.find('.submit');
       wrapper.setState(mockData);
       submit.simulate('click');
       expect(wrapper.state('errorAmount')).toEqual('Amount is require');
+    });
+
+    it('should change errorAmount state when amount is 0', () => {
+      const mockData = {
+        from: 'Budi',
+        to: 'Doni',
+        amount: '0',
+        description: 'pay go food',
+      };
+      const wrapper = mount(<Transfer/>);
+      const submit = wrapper.find('.submit');
+      wrapper.setState(mockData);
+      submit.simulate('click');
+      expect(wrapper.state('errorAmount')).toEqual('Invalid amount');
     });
 
     it('should call errorDescription if Description is empty', () => {
@@ -180,11 +194,38 @@ describe('Transfer', () => {
         amount: '20000',
         description: '',
       };
-      const wrapper = mount(<Transfer />);
+      const wrapper = mount(<Transfer/>);
       const submit = wrapper.find('.submit');
       wrapper.setState(mockData);
       submit.simulate('click');
       expect(wrapper.state('errorDescription')).toEqual('Description is require');
+    });
+    describe('after submit', () => {
+      it('should reset field to blank', (done) => {
+        const wrapper = mount(<Transfer/>);
+        wrapper.setState({
+          amount: 1000,
+          description: 'Abc',
+          to: {
+            walletId: 2,
+          },
+          from: {
+            walletId: 3,
+          },
+        });
+        const submit = wrapper.find('.submit');
+        submit.simulate('click');
+        moxios.wait(() => {
+          let request = moxios.requests.mostRecent();
+          request.respondWith({
+            status: 200,
+          }).then(() => {
+            expect(wrapper.state('amount')).toEqual('');
+            expect(wrapper.state('description')).toEqual('');
+            done();
+          });
+        });
+      });
     });
   });
 });
