@@ -2,7 +2,6 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import TransactionDesktop from './TransactionDesktop';
-import TransactionMobile from './TransactionMobile';
 
 export default class Transaction extends Component {
   constructor(props) {
@@ -63,7 +62,6 @@ export default class Transaction extends Component {
         <div>
           <TransactionDesktop transactionCollection={this.state.transactionCollection}
                               transactionWalletId={this.props.walletNumber}/>
-          <TransactionMobile transactionCollection={this.state.transactionCollection}/>
         </div>
     );
   }
