@@ -187,19 +187,6 @@ describe('Transfer', () => {
       expect(wrapper.state('errorAmount')).toEqual('Invalid amount');
     });
 
-    it('should call errorDescription if Description is empty', () => {
-      const mockData = {
-        from: 'Budi',
-        to: 'Doni',
-        amount: '20000',
-        description: '',
-      };
-      const wrapper = mount(<Transfer/>);
-      const submit = wrapper.find('.submit');
-      wrapper.setState(mockData);
-      submit.simulate('click');
-      expect(wrapper.state('errorDescription')).toEqual('Description is require');
-    });
     describe('after submit', () => {
       it('should reset field to blank', (done) => {
         const wrapper = mount(<Transfer/>);
