@@ -59,55 +59,6 @@ describe('LoginForm', () => {
     });
   });
   describe('#handleInputOnSubmit', () => {
-    it('should change store data when click submit button', (done) => {
-      const mockFunction = jest.fn();
-      store.addChangeListener(mockFunction);
-      const wrapper = mount(<LoginForm />);
-      wrapper.setState({
-        username: 'iqbal',
-        password: 'admin',
-      });
-      const button = wrapper.find('.submit');
-      button.simulate('click');
-      moxios.wait(() => {
-        let request = moxios.requests.mostRecent();
-        request.respondWith({
-          status: 200,
-          response:
-              {
-                data: {
-                  data: {
-                    userId: 1,
-                    walletId: 1,
-                    name: 'test',
-                    isLoggedIn: true,
-                  },
-                },
-              },
-        }).then(() => {
-//          console.log(store);
-//          expect(store.data.userId).toEqual(1);
-//          expect(store.data.walletId).toEqual(1);
-//          expect(store.data.name).toEqual('test');
-//          expect(store.data.isLoggedIn).toEqual(true);
-          done();
-        });
-      });
-    });
-
-    it('should call callback with given data', () => {
-      const mockData = {
-        username: 'iqbaaaaalf',
-        password: 'asdasd',
-      };
-      const mockFunction = jest.fn();
-      const wrapper = mount(<LoginForm onSubmit={mockFunction} />);
-      const submit = wrapper.find('.submit');
-      wrapper.setState(mockData);
-      submit.simulate('click');
-      expect(mockFunction).toHaveBeenCalled();
-      expect(mockFunction).toHaveBeenLastCalledWith(mockData);
-    });
     it('should change state of errorUsername when username is empty', () => {
       const mockData = {
         username: '',
