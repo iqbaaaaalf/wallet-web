@@ -50,12 +50,6 @@ export default class Transfer extends Component {
     event.preventDefault();
     const { from, to, amount, description } = this.state;
     let valid = true;
-    if (description === '') {
-      valid = false;
-      this.setState({
-        errorDescription: 'Description is require',
-      });
-    }
     if (amount === '') {
       valid = false;
       this.setState({
