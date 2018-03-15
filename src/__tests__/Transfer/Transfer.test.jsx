@@ -19,9 +19,9 @@ describe('Transfer', () => {
         let request = moxios.requests.mostRecent();
         request.respondWith({
           status: 200,
-          response: [ { name: 'Test' } ],
+          response: [ { id: 1, name: 'Test' } ],
         }).then(() => {
-          expect(wrapper.state('payeeList')).toEqual([ { name: 'Test' } ]);
+          expect(wrapper.state('payeeList')).toEqual([ { id: 1, name: 'Test' } ]);
           done();
         });
       });
@@ -48,7 +48,7 @@ describe('Transfer', () => {
       wrapper.setState({
         name: 'Budi',
       });
-      const from = wrapper.find('span');
+      const from = wrapper.find('span').at(0);
       expect(from.text()).toEqual('Budi');
     });
   });
@@ -82,6 +82,9 @@ describe('Transfer', () => {
   describe('handle changing PayeeList', () => {
     it('should change "to" state when payeeList changing', (done) => {
       const wrapper = mount(<Transfer />);
+      wrapper.setState({
+        payeeList: [{walletId: 1, name: 'Test'}],
+      })
       const payeeListWrapper = wrapper.find(Payeelist);
       const comboboxElement = payeeListWrapper.find('#comboPayee');
       comboboxElement.simulate('change', {
@@ -159,7 +162,7 @@ describe('Transfer', () => {
       });
     });
 
-    it('should call errorAmount if amount is empty', () => {
+    it('should call message if amount is empty', () => {
       const mockData = {
         from: 'Budi',
         to: 'Doni',
@@ -170,10 +173,10 @@ describe('Transfer', () => {
       const submit = wrapper.find('.submit-send');
       wrapper.setState(mockData);
       submit.simulate('click');
-      expect(wrapper.state('errorAmount')).toEqual('Amount is require');
+      expect(wrapper.state('message')).toEqual('Amount is require');
     });
 
-    it('should change errorAmount state when amount is 0', () => {
+    it('should change message state when amount is 0', () => {
       const mockData = {
         from: 'Budi',
         to: 'Doni',
@@ -184,7 +187,7 @@ describe('Transfer', () => {
       const submit = wrapper.find('.submit-send');
       wrapper.setState(mockData);
       submit.simulate('click');
-      expect(wrapper.state('errorAmount')).toEqual('Invalid amount');
+      expect(wrapper.state('message')).toEqual('Invalid amount');
     });
 
     describe('after submit', () => {
