@@ -3,6 +3,7 @@ import moxios from 'moxios';
 import React from 'react';
 import Payeelist from '../../js/components/Transfer/Payeelist';
 import Transfer from '../../js/components/Transfer/Transfer';
+import store from 'simple-global-store';
 
 describe('Transfer', () => {
   beforeEach(() => {
@@ -14,12 +15,15 @@ describe('Transfer', () => {
 
   describe('componentDidMount', () => {
     it('should change payeeList state after rendered', (done) => {
+      store.update({userId: 1});
       const wrapper = shallow(<Transfer />);
       moxios.wait(() => {
-        let request = moxios.requests.mostRecent();
-        request.respondWith({
+        let request = moxios.requests.at(0);
+        return request.respondWith({
           status: 200,
           response: [ { id: 1, name: 'Test' } ],
+        }).then(() => {
+          return moxios.requests.at(1).respondWith({status: 200, response: {id: 1}});
         }).then(() => {
           expect(wrapper.state('payeeList')).toEqual([ { id: 1, name: 'Test' } ]);
           done();
