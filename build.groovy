@@ -8,7 +8,7 @@ node {
     }
     stage ("Test") {
         testImage.inside{
-            sh "npm run test"
+            sh "CI=true npm run test"
         }
     }
     stage('deploy'){
