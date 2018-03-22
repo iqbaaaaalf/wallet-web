@@ -12,6 +12,8 @@ node {
         }
     }
     stage('deploy'){
-      sh "npm start"
+      testImage.inside{
+          sh "npm start"
+      }
     }
 }
