@@ -11,9 +11,4 @@ node {
             sh "CI=true npm run test"
         }
     }
-  #  stage('deploy'){
-  #    testImage.inside{
-  #        sh "npm start"
-  #    }
-  #  }
 }
